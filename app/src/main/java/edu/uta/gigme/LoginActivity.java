@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.et_emailID);
         populateAutoComplete();
-
+        final Button register = (Button) findViewById(R.id.btn_register);
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -91,6 +91,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        register.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View V){
+                startActivity(new Intent(LoginActivity.this, register.class));
+            }
+        });
     }
 
     private void populateAutoComplete() {
@@ -198,9 +204,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         //TODO: Replace this with your own logic
         return password.length() > 4;
     }
-    public void sendMessage(View view) {
-        Intent intent = new Intent(this, register.class);
-    }
+
     /**
      * Shows the progress UI and hides the login form.
      */

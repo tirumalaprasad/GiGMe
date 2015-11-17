@@ -64,7 +64,6 @@
                 android:layout_gravity="center"
                 android:background="@android:color/transparent"
                 android:textSize="25dp"
-                android:onClick="sendMessage"
                 android:textColor="#f7f7f7"/>
 
             <TextView
