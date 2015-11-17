@@ -31,15 +31,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.uta.gigme.LoginActivity" />
         </activity>
-        <activity
-            android:name=".Events"
-            android:label="@string/title_activity_events"
-            android:parentActivityName=".LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.uta.gigme.LoginActivity" />
-        </activity>
     </application>
 
 </manifest>
