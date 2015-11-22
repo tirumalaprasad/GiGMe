@@ -26,9 +26,6 @@
         android:layout_alignParentTop="true"
         android:backgroundTint="#fcfafa" />
 
-
-
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -87,12 +84,13 @@
         android:layout_alignParentEnd="true"
         android:backgroundTint="#fcfafa" />
 
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="phone"
         android:ems="10"
-        android:id="@+id/et_phonenumber"
+        android:id="@+id/et_phoneNumber"
         android:textColorHint="#f7f7f7"
         android:textColor="#f7f7f7"
         android:layout_below="@+id/et_DOB"
@@ -109,7 +107,7 @@
         android:textColorHint="#f7f7f7"
         android:checked="false"
         android:textColor="#f7f7f7"
-        android:layout_below="@+id/et_phonenumber"
+        android:layout_below="@+id/et_phoneNumber"
         android:layout_alignParentStart="true"
         android:layout_marginStart="51dp"
         android:backgroundTint="#fcfafa" />
@@ -132,12 +130,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Register"
-        android:id="@+id/button"
+        android:id="@+id/btn_regPageRegister"
         android:background="@android:color/transparent"
         android:textSize="25dp"
-
         android:layout_below="@+id/rb_male"
         android:textColor="#f7f7f7"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="36dp" />
+
+
 </RelativeLayout>
