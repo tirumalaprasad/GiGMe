@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * A login screen that offers login via email/password.
@@ -19,6 +20,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText mPasswordTextView;
     private View mProgressView;
     private View mLoginFormView;
+    UserLocalStore userLocalStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +42,53 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 String mEmail = mEmailTextView.getText().toString();
                 String mPassword = mPasswordTextView.getText().toString();
                 User user = new User(mEmail, mPassword);
+                authenticate(user);
                 break;
+
             case R.id.btn_register:
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 break;
         }
     }
+
+    public void authenticate(User user)
+    {
+        ServerRequest serverRequest = new ServerRequest(this);
+        serverRequest.fetchUserDataInBackground(user, new GetUserCallback(){
+            @Override
+            public void done(User returnedUser)
+            {
+                if (returnedUser == null)
+                {
+                    System.out.println("If");
+                    showErrorMessage();
+                }
+
+                else
+                {
+                    System.out.println("Else");
+                    //LoginActivity l = new LoginActivity();
+                    logUserIn(returnedUser);
+                }
+            }
+        });
+    }
+
+    private void showErrorMessage()
+    {
+        Toast.makeText(this, "Incorrect uname and/or pass", Toast.LENGTH_LONG).show();
+    }
+
+
+    void logUserIn(User returnedUser)
+    {
+        System.out.println("Entered logUserIn: " + returnedUser.email + " " + returnedUser.name + " " + returnedUser.password + " " + returnedUser.dob
+        + " " +returnedUser.phone_number + " " + returnedUser.sex);
+        userLocalStore.storeUserData(returnedUser);
+        userLocalStore.setUserLoggedIn(true);
+        System.out.println("Just before start_main");
+        startActivity(new Intent(this, MainActivity.class));
+    }
 }
+
 

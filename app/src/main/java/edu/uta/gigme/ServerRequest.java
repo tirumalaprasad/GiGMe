@@ -59,14 +59,14 @@ public class ServerRequest
         progressDialog.setMessage("Please wait...");
     }
 
-    public void storeUserDataInBackground(User user, GetUserCallBack userCallBack)
+    public void storeUserDataInBackground(User user, GetUserCallback userCallBack)
     {
         progressDialog.show();
         new StoreUserDataAsyncTask(user, userCallBack).execute();
     }
 
 
-    public void fetchUserDataInBackground(User user, GetUserCallBack userCallBack)
+    public void fetchUserDataInBackground(User user, GetUserCallback userCallBack)
     {
         progressDialog.show();
         new FetchUserDataAsyncTask(user, userCallBack).execute();
@@ -75,9 +75,9 @@ public class ServerRequest
     public class StoreUserDataAsyncTask extends AsyncTask<Void, Void, Void>
     {
         User user;
-        GetUserCallBack userCallBack;
+        GetUserCallback userCallBack;
 
-        public StoreUserDataAsyncTask(User user, GetUserCallBack userCallBack)
+        public StoreUserDataAsyncTask(User user, GetUserCallback userCallBack)
         {
             this.user = user;
             this.userCallBack = userCallBack;
@@ -97,9 +97,11 @@ public class ServerRequest
         {
             ArrayList<NameValuePair> dataToSend = new ArrayList<>();
             dataToSend.add(new BasicNameValuePair("name", user.name));
-            dataToSend.add(new BasicNameValuePair("uname", user.uname));
-            dataToSend.add(new BasicNameValuePair("pass", user.pass));
-            dataToSend.add(new BasicNameValuePair("age", user.age + ""));
+            dataToSend.add(new BasicNameValuePair("email", user.email));
+            dataToSend.add(new BasicNameValuePair("password", user.password));
+            dataToSend.add(new BasicNameValuePair("dob", user.dob));
+            dataToSend.add(new BasicNameValuePair("phone_number", user.phone_number));
+            dataToSend.add(new BasicNameValuePair("sex", user.sex));
 
             HttpParams httpRequestParams = new BasicHttpParams();
             HttpConnectionParams.setConnectionTimeout(httpRequestParams, CONNECTION_TIMEOUT);
@@ -127,9 +129,9 @@ public class ServerRequest
     public class FetchUserDataAsyncTask extends AsyncTask<Void, Void, User>
     {
         User user;
-        GetUserCallBack userCallBack;
+        GetUserCallback userCallBack;
 
-        public FetchUserDataAsyncTask(User user, GetUserCallBack userCallBack)
+        public FetchUserDataAsyncTask(User user, GetUserCallback userCallBack)
         {
             this.user = user;
             this.userCallBack = userCallBack;
@@ -148,8 +150,8 @@ public class ServerRequest
         {
             ArrayList<NameValuePair> dataToSend = new ArrayList<>();
             //dataToSend.add(new BasicNameValuePair("name", user.name));
-            dataToSend.add(new BasicNameValuePair("uname", user.uname));
-            dataToSend.add(new BasicNameValuePair("pass", user.pass));
+            dataToSend.add(new BasicNameValuePair("email", user.email));
+            dataToSend.add(new BasicNameValuePair("password", user.password));
             //dataToSend.add(new BasicNameValuePair("pass", user.pass));
             System.out.println(dataToSend);
             //dataToSend.add(new BasicNameValuePair("age", user.age + ""));
@@ -182,11 +184,15 @@ public class ServerRequest
                 else
                 {
                     String name = jsonObject.getString("name");
-                    int age = jsonObject.getInt("age");
+                    String email = jsonObject.getString("email");
+                    String password = jsonObject.getString("password");
+                    String dob = jsonObject.getString("dob");
+                    String phone_number = jsonObject.getString("phone_number");
+                    String sex = jsonObject.getString("sex");
 
-                    returnedUser = new User(name, user.uname, user.pass, age);
+                    returnedUser = new User(name, email, password, dob, phone_number, sex);
 
-                    System.out.println("ServerRequest ka doInBackground : "+returnedUser.uname+returnedUser.pass);
+                    System.out.println("ServerRequest ka doInBackground : "+returnedUser.email+returnedUser.password);
                 }
             }
 
@@ -199,9 +205,9 @@ public class ServerRequest
         }
     }
 
-    public String url = "http://omega.uta.edu/~sbs5577/getList.php";
+    //public String url = "http://omega.uta.edu/~sbs5577/getList.php";
 
-
+    /*
     public class fetchEventListAsyncTask extends AsyncTask<String, Void, String>{
         public Context context;
         Activity activity;
@@ -323,10 +329,13 @@ public class ServerRequest
         }
     }
 
+
     public void accessWebService(Context context, Activity activity)
     {
         fetchEventListAsyncTask jsonReadTask = new fetchEventListAsyncTask(context, activity);
         jsonReadTask.execute(new String[]{url});
 
     }
+
+    */
 }

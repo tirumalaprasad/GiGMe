@@ -3,6 +3,7 @@ package edu.uta.gigme;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -14,30 +15,34 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegisterActivity extends AppCompatActivity implements View.OnClickListener
+{
     EditText mEtName, mEtEmail, mEtPassword, mEtRePassword, mEtPhone, mEtDOB;
     RadioGroup mRgSex;
-    RadioButton mRbSex;
+    //RadioButton mRbSex;
     Button mBtnRegister;
     String sSex;
     private SimpleDateFormat dateFormat;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         initializeUI();
         initializeClickListeners();
     }
 
-    private void initializeClickListeners() {
+    private void initializeClickListeners()
+    {
         mBtnRegister.setOnClickListener(this);
         mEtDOB.setOnClickListener(this);
     }
 
-    private void initializeUI() {
+    private void initializeUI()
+    {
         mEtName = (EditText) findViewById(R.id.et_name);
-        mEtEmail = (EditText) findViewById(R.id.et_emailID);
+        mEtEmail = (EditText) findViewById(R.id.et_email);
         mEtPassword = (EditText) findViewById(R.id.et_password);
         mEtRePassword = (EditText) findViewById(R.id.et_re_password);
         mEtDOB = (EditText) findViewById(R.id.et_dob);
@@ -48,8 +53,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
             case R.id.et_dob:
                 final Calendar calendar = Calendar.getInstance();
                 final int mYear = calendar.get(Calendar.YEAR);
@@ -71,6 +78,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 String sEmail = mEtEmail.getText().toString();
                 String sPassword = mEtPassword.getText().toString();
                 String sRePassword = mEtRePassword.getText().toString();
+                Log.d("RegisterActivity", sSex);
                 int iSex;
                 if (sSex.equalsIgnoreCase("male")) {
                     iSex = 0; // male code
@@ -79,18 +87,20 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 }
                 String sDOB = mEtDOB.getText().toString();
                 String sPhoneNumber = mEtPhone.getText().toString();
-                User registeredUser = new User(sName, sEmail, sPassword, sDOB, sPhoneNumber, iSex);
+                User registeredUser = new User(sName, sEmail, sPassword, sDOB, sPhoneNumber, sSex);
                 registerUser(registeredUser);
                 break;
         }
     }
 
-    private void registerUser(User registeredUser) {
+    private void registerUser(User registeredUser)
+    {
         ServerRequest serverRequest = new ServerRequest(this);
-        serverRequest.storeUserDataInBackground(registeredUser, new GetUserCallback() {
-
+        serverRequest.storeUserDataInBackground(registeredUser, new GetUserCallback()
+        {
             @Override
-            public void done(User returnedUser) {
+            public void done(User returnedUser)
+            {
                 Toast.makeText(RegisterActivity.this, "You've been registered successully!", Toast.LENGTH_LONG).show();
             }
         });

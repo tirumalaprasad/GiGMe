@@ -1,9 +1,9 @@
 package edu.uta.gigme;
 
 /**
- * Created by Siddharth Shah on 9/19/2015.
+ * Created by Siddharth Shah on 11/22/2015.
  */
-public interface GetUserCallBack
+public interface GetUserCallback
 {
     public abstract void done(User returnedUser);
 }
