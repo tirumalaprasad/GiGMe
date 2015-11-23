@@ -1,9 +1,9 @@
 package edu.uta.gigme;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -12,8 +12,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener
 {
@@ -22,7 +22,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     //RadioButton mRbSex;
     Button mBtnRegister;
     String sSex;
-    private SimpleDateFormat dateFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -58,38 +57,47 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId())
         {
             case R.id.et_dob:
-                final Calendar calendar = Calendar.getInstance();
-                final int mYear = calendar.get(Calendar.YEAR);
-                final int mMonth = calendar.get(Calendar.MONTH);
-                final int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+                Calendar calendar = Calendar.getInstance();
+                int mYear = calendar.get(Calendar.YEAR);
+                int mMonth = calendar.get(Calendar.MONTH);
+                int mDay = calendar.get(Calendar.DAY_OF_MONTH);
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
                         RegisterActivity.this,
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                mEtDOB.setText(monthOfYear + "-" + dayOfMonth + "-" + year);
+                                mEtDOB.setText(monthOfYear+1 + "/" + dayOfMonth + "/" + year);
                                 mEtPhone.requestFocus();
                             }
                         }, mYear, mMonth, mDay);
+
+                datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
                 datePickerDialog.show();
                 break;
+
             case R.id.btn_register:
                 String sName = mEtName.getText().toString();
                 String sEmail = mEtEmail.getText().toString();
                 String sPassword = mEtPassword.getText().toString();
                 String sRePassword = mEtRePassword.getText().toString();
-                Log.d("RegisterActivity", sSex);
-                int iSex;
-                if (sSex.equalsIgnoreCase("male")) {
-                    iSex = 0; // male code
-                } else {
-                    iSex = 1; // female code
-                }
+                //Log.d("RegisterActivity", sSex);
+
                 String sDOB = mEtDOB.getText().toString();
                 String sPhoneNumber = mEtPhone.getText().toString();
-                User registeredUser = new User(sName, sEmail, sPassword, sDOB, sPhoneNumber, sSex);
-                registerUser(registeredUser);
-                break;
+                VerifyUserDetails verifyUserDetails = new VerifyUserDetails(sName, sEmail, sPassword, sRePassword, sPhoneNumber);
+
+                if(verifyUserDetails.verify())
+                    {
+                        User registeredUser = new User(sName, sEmail, sPassword, sDOB, sPhoneNumber, sSex);
+                        registerUser(registeredUser);
+                        break;
+                    }
+
+                else
+                    {
+                        Toast.makeText(this, verifyUserDetails.verificationResult, Toast.LENGTH_LONG).show();
+                        break;
+                    }
         }
     }
 
@@ -102,6 +110,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             public void done(User returnedUser)
             {
                 Toast.makeText(RegisterActivity.this, "You've been registered successully!", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
             }
         });
     }

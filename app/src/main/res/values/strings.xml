@@ -1,6 +1,32 @@
 <resources>
     <string name="app_name">GiGMe</string>
-    
+
+    <!-- beverage type popup -->
+    <string name="type_of_food_prompt">Select beverage type</string>
+    <string-array name="type_of_food_arrays">
+        <item>Vegetarian</item>
+        <item>Non-vegetarian</item>
+        <item>Both</item>
+    </string-array>
+
+    <string name="city_prompt">Select your city</string>
+    <string-array name="city_arrays">
+        <item>Arlington</item>
+        <item>Dallas</item>
+        <item>Forth Worth</item>
+        <item>Houston</item>
+    </string-array>
+
+
+    <string name="genre_prompt">Select event genre</string>
+    <string-array name="genre_arrays">
+        <item>Metal</item>
+        <item>Rock</item>
+        <item>Pop</item>
+        <item>EDM</item>
+        <item>Psychaedelic</item>
+    </string-array>
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -17,6 +43,7 @@
         completions."
     </string>
     <string name="title_activity_register">Register</string>
+    <string name="title_activity_login">Login</string>
     <string name="title_activity_events">Events</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -25,4 +52,21 @@
     <string name="action_settings">Settings</string>
     <string name="prompt_phone_number">Enter your phone number</string>
     <string name="prompt_dob">Enter your date of birth</string>
+    <string name="title_activity_add_event">AddEventActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_all_events">AllEventsActivity</string>
+    <string name="title_add_event">Add an event..</string>
+    <string name="event_name">Event Name</string>
+    <string name="event_address">Event Address</string>
+    <string name="event_cover_charge">Event Cover Charge</string>
+    <string name="event_host_phone">Your phone number</string>
+    <string name="select_beverage_type">Select beverage type</string>
+    <string name="select_city">Select city</string>
+    <string name="is_private">Check if this is a private event</string>
+    <string name="isMinAge">Check if this event is restricted for above 21</string>
+    <string name="set_from_date">Event starts on</string>
+    <string name="set_from_time">Event starts at</string>
+    <string name="set_to_date">Event ends on</string>
+    <string name="set_to_time">Event ends at</string>
 </resources>

@@ -141,6 +141,7 @@ public class ServerRequest
         protected void onPostExecute(User returnedUser)
         {
             progressDialog.dismiss();
+            //System.out.println(returnedUser.email+returnedUser.password+returnedUser.name);
             userCallBack.done(returnedUser);  //got a user
             super.onPostExecute(returnedUser);
         }
@@ -184,13 +185,13 @@ public class ServerRequest
                 else
                 {
                     String name = jsonObject.getString("name");
-                    String email = jsonObject.getString("email");
-                    String password = jsonObject.getString("password");
+                    //String email = jsonObject.getString("email");
+                    //String password = jsonObject.getString("password");
                     String dob = jsonObject.getString("dob");
                     String phone_number = jsonObject.getString("phone_number");
                     String sex = jsonObject.getString("sex");
 
-                    returnedUser = new User(name, email, password, dob, phone_number, sex);
+                    returnedUser = new User(name, user.email, user.password, dob, phone_number, sex);
 
                     System.out.println("ServerRequest ka doInBackground : "+returnedUser.email+returnedUser.password);
                 }

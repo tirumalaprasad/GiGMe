@@ -8,8 +8,7 @@ import android.util.Log;
  */
 public class VerifyUserDetails
 {
-    String name, email, password;
-    String age;
+    String name, email, password, repassword, phone_number;
 
     String verificationResult = "";
 
@@ -23,18 +22,29 @@ public class VerifyUserDetails
         verifyPassword();
     }
 
-    public VerifyUserDetails(String name, String email, String password, String age)
+    public VerifyUserDetails(String name, String email, String password, String repassword, String phone_number)
     {
         this.name=name;
         this.email=email;
         this.password=password;
-        this.age = age;
+        this.repassword = repassword;
+        this.phone_number = phone_number;
 
         verifyIfEmptyOnRegister();
         verifyName();
         verifyEmail();
         verifyPassword();
-        //verifyAge();
+        verifyPasswords();
+        verifyPhone();
+        verify();
+    }
+
+    private void verifyPhone()
+    {
+        if (phone_number.length() != 10 && !phone_number.equals(""))
+        {
+            verificationResult += "Invalid phone number";
+        }
     }
 
     public void verifyIfEmptyOnLogin()
@@ -43,8 +53,6 @@ public class VerifyUserDetails
         {
             verificationResult += "Please enter all fields \n";
         }
-
-        //return verificationResult;
     }
 
     public void verifyIfEmptyOnRegister()
@@ -55,11 +63,16 @@ public class VerifyUserDetails
         }
     }
 
+    public void verifyPasswords()
+    {
+        if (!password.equals(repassword))
+        {
+            verificationResult += "Entered passwords should match";
+        }
+    }
+
     public void verifyName()
     {
-        //Pattern pattern = Pattern.compile("^\\p{L}+$");
-        //Matcher matcher = pattern.matcher(name);
-
         if (!name.matches("^[a-zA-Z]+$"))
         {
             verificationResult += "Name should contain only letters \n";
@@ -81,19 +94,6 @@ public class VerifyUserDetails
         if (password.length() < 5)
         {
             verificationResult += "Password should be at leaast 5 charachters long \n";
-        }
-    }
-
-    public void verifyAge()
-    {
-        if (age.equals(""))
-        {
-            verificationResult += "Enter a valid Age \n";
-        }
-
-        else if(Integer.parseInt(age) <= 0)
-        {
-            verificationResult += "Enter a valid Age \n";
         }
     }
 

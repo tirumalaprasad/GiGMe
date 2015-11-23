@@ -23,7 +23,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     UserLocalStore userLocalStore;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
@@ -33,6 +34,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mBtnLogin = (Button) findViewById(R.id.btn_login);
         mBtnLogin.setOnClickListener(this);
         mBtnRegister.setOnClickListener(this);
+        userLocalStore = new UserLocalStore(this);
     }
 
     @Override
@@ -41,9 +43,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btn_login:
                 String mEmail = mEmailTextView.getText().toString();
                 String mPassword = mPasswordTextView.getText().toString();
-                User user = new User(mEmail, mPassword);
-                authenticate(user);
-                break;
+
+                VerifyUserDetails verifyUserDetails = new VerifyUserDetails(mEmail, mPassword);
+
+                if (verifyUserDetails.verify())
+                {
+                    User user = new User(mEmail, mPassword);
+                    authenticate(user);
+                    break;
+                }
+
+                else
+                {
+                    Toast.makeText(this, verifyUserDetails.verificationResult, Toast.LENGTH_LONG).show();
+                    break;
+                }
 
             case R.id.btn_register:
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
@@ -80,15 +94,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
-    void logUserIn(User returnedUser)
+    public void logUserIn(User returnedUser)
     {
         System.out.println("Entered logUserIn: " + returnedUser.email + " " + returnedUser.name + " " + returnedUser.password + " " + returnedUser.dob
         + " " +returnedUser.phone_number + " " + returnedUser.sex);
         userLocalStore.storeUserData(returnedUser);
         userLocalStore.setUserLoggedIn(true);
         System.out.println("Just before start_main");
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this, AllEventsActivity.class));
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        super.onBackPressed();
     }
 }
-
-
