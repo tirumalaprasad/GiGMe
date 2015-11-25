@@ -13,7 +13,8 @@ import android.widget.TimePicker;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AddEventActivity extends AppCompatActivity implements View.OnClickListener{
+public class AddEventActivity extends AppCompatActivity implements View.OnClickListener
+{
     Button btnFromDate, btnFromTime, btnToDate, btnToTime;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,6 +1,8 @@
 package edu.uta.gigme;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,8 +15,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
 public class AllEventsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -22,6 +28,8 @@ public class AllEventsActivity extends AppCompatActivity
     UserLocalStore userLocalStore;
     public ProgressDialog progressDialog;
     ListView listView;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -60,19 +68,27 @@ public class AllEventsActivity extends AppCompatActivity
         ServerRequest serverRequest = new ServerRequest(this);
         serverRequest.accessWebService(this, this);
 
-        /*
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading events");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
-        */
         listView = (ListView) findViewById(R.id.listEvents);
-        //callWebService();
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> view, View v, int position,
+                                    long id) {
+
+                //String selected = ((TextView) v.findViewById(R.id.)).getText().toString()
+
+                String temp = ((TextView)view.findViewById(R.id.tv_list)).getText().toString();
+                Toast.makeText(AllEventsActivity.this, temp , Toast.LENGTH_LONG).show();
+                //Intent intent = new Intent(AllEventsActivity.this, ViewEventDetails.class);
+
+                //startActivity(intent);
+            }
+        });
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -150,5 +166,6 @@ public class AllEventsActivity extends AppCompatActivity
     {
         return userLocalStore.getUserLoggedIn();
     }
+
 
 }

@@ -69,4 +69,5 @@
     <string name="set_from_time">Event starts at</string>
     <string name="set_to_date">Event ends on</string>
     <string name="set_to_time">Event ends at</string>
+    <string name="title_activity_view_event_details">ViewEventDetails</string>
 </resources>
