@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void authenticate(User user)
     {
         ServerRequest serverRequest = new ServerRequest(this);
-        serverRequest.fetchUserDataInBackground(user, new GetUserCallback(){
+        serverRequest.fetchUserDataInBackground(user, new GetUserCallBack(){
             @Override
             public void done(User returnedUser)
             {

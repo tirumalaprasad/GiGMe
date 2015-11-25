@@ -104,7 +104,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void registerUser(User registeredUser)
     {
         ServerRequest serverRequest = new ServerRequest(this);
-        serverRequest.storeUserDataInBackground(registeredUser, new GetUserCallback()
+        serverRequest.storeUserDataInBackground(registeredUser, new GetUserCallBack()
         {
             @Override
             public void done(User returnedUser)
