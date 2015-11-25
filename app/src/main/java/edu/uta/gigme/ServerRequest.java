@@ -59,14 +59,14 @@ public class ServerRequest
         progressDialog.setMessage("Please wait...");
     }
 
-    public void storeUserDataInBackground(User user, GetUserCallback userCallBack)
+    public void storeUserDataInBackground(User user, GetUserCallBack userCallBack)
     {
         progressDialog.show();
         new StoreUserDataAsyncTask(user, userCallBack).execute();
     }
 
 
-    public void fetchUserDataInBackground(User user, GetUserCallback userCallBack)
+    public void fetchUserDataInBackground(User user, GetUserCallBack userCallBack)
     {
         progressDialog.show();
         new FetchUserDataAsyncTask(user, userCallBack).execute();
@@ -75,9 +75,9 @@ public class ServerRequest
     public class StoreUserDataAsyncTask extends AsyncTask<Void, Void, Void>
     {
         User user;
-        GetUserCallback userCallBack;
+        GetUserCallBack userCallBack;
 
-        public StoreUserDataAsyncTask(User user, GetUserCallback userCallBack)
+        public StoreUserDataAsyncTask(User user, GetUserCallBack userCallBack)
         {
             this.user = user;
             this.userCallBack = userCallBack;
@@ -129,9 +129,9 @@ public class ServerRequest
     public class FetchUserDataAsyncTask extends AsyncTask<Void, Void, User>
     {
         User user;
-        GetUserCallback userCallBack;
+        GetUserCallBack userCallBack;
 
-        public FetchUserDataAsyncTask(User user, GetUserCallback userCallBack)
+        public FetchUserDataAsyncTask(User user, GetUserCallBack userCallBack)
         {
             this.user = user;
             this.userCallBack = userCallBack;
@@ -204,6 +204,146 @@ public class ServerRequest
 
             return returnedUser;
         }
+    }
+
+    public String url = "http://omega.uta.edu/~sbs5577/getList.php";
+
+
+    public class fetchEventListAsyncTask extends AsyncTask<String, Void, String>{
+        public Context context;
+        Activity activity;
+        public String jsonResult;
+
+        public ListView listView;
+
+        ProgressDialog pd2;
+
+
+        public fetchEventListAsyncTask(Context context, Activity activity)
+        {
+            this.context = context;
+            this.activity = activity;
+            listView = (ListView)this.activity.findViewById(R.id.listEvents);
+            pd2 = new ProgressDialog(context);
+            pd2.setMessage("Loading events");
+            pd2.setCancelable(false);
+            pd2.show();
+        }
+
+        //Events events;
+        @Override
+        protected String doInBackground(String... strings)
+        {
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(strings[0]);
+
+            try
+            {
+                System.out.println("Entered try "+httpPost);
+                HttpResponse httpResponse = httpClient.execute(httpPost);
+                //System.out.println("jsonResult before inputStream : "+jsonResult);
+                //System.out.println("httpResponse : "+httpResponse.getEntity().getContent());
+                jsonResult = inputStreamToString(httpResponse.getEntity().getContent()).toString();
+                //System.out.println("jsonResult after inputStream : "+jsonResult);
+            }
+
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        private StringBuilder inputStreamToString(InputStream content)
+        {
+            String rLine = "";
+            StringBuilder stringBuilder = new StringBuilder();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(content));
+            try
+            {
+                System.out.println("in try of inputStreamToString");
+                while((rLine = bufferedReader.readLine()) != null)
+                {
+                    //System.out.println("in while loop : ");
+                    stringBuilder.append(rLine);
+                    System.out.println("rLine" + rLine);
+                }
+            }
+
+            catch (ConnectException e)
+            {
+                System.out.println("ConnectException");
+            }
+
+            catch (IOException e)
+            {
+                System.out.println("IOException");
+                e.printStackTrace();
+            }
+            System.out.println("stringBuilder : "+stringBuilder);
+            return stringBuilder;
+        }
+
+        @Override
+        protected void onPostExecute(String s)
+        {
+            ListDrawer();
+
+        }
+
+        private void ListDrawer()
+        {
+            List<Map<String, String>> eventList = new ArrayList<Map<String, String>>();
+            try
+            {
+                JSONObject jsonResponse = new JSONObject(jsonResult);
+                JSONArray jsonArray = jsonResponse.getJSONArray("events");
+                System.out.println("jsonArray.length()"+jsonArray.length());
+                for (int i = 0; i < jsonArray.length(); i++)
+                {
+                    JSONObject jsonChildNode = jsonArray.getJSONObject(i);
+                    String event_name = jsonChildNode.optString("EVENT_NAME");
+                    String event_id = jsonChildNode.optString("EVENT_ID");
+                    String event_output = event_name + "-" +event_id;
+
+                    eventList.add(createEventHashmap("all_events" ,event_output));
+                    System.out.println("eventlist : "+eventList);
+                }
+            }
+
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+                System.out.println("JSONException");
+            }
+
+            System.out.println("getContext:" + context.getApplicationContext());
+            SimpleAdapter simpleAdapter = new SimpleAdapter
+                    (
+                    context.getApplicationContext(),
+                    eventList,
+                    R.layout.custom_textview,
+                    new String[]{"all_events"},
+                    new int[] {R.id.tv_list}
+                    );
+
+            listView.setAdapter(simpleAdapter);
+            pd2.dismiss();
+        }
+
+        private Map<String, String> createEventHashmap(String key_name, String event_output)
+        {
+            HashMap<String, String> eventNameId = new HashMap<String, String>();
+            eventNameId.put(key_name, event_output);
+            System.out.println("key_name:" + key_name);
+            return eventNameId;
+        }
+    }
+
+    public void accessWebService(Context context, Activity activity)
+    {
+        fetchEventListAsyncTask jsonReadTask = new fetchEventListAsyncTask(context, activity);
+        jsonReadTask.execute(new String[]{url});
     }
 
     //public String url = "http://omega.uta.edu/~sbs5577/getList.php";
