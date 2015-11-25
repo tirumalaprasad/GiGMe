@@ -109,20 +109,15 @@ public class AllEventsActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_city) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_genre) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_filter) {
 
-        } else if (id == R.id.nav_share) {
-            UserLocalStore userLocalStore = new UserLocalStore(this);
-            userLocalStore.clearUserData();
-            userLocalStore.setUserLoggedIn(false);
-            startActivity(new Intent(this, LoginActivity.class));
-        } else if (id == R.id.nav_send) {
+        }  else if (id == R.id.nav_mygigs) {
+
+        } else if (id == R.id.nav_logout) {
 
         }
 

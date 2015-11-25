@@ -69,4 +69,14 @@
     <string name="set_from_time">Event starts at</string>
     <string name="set_to_date">Event ends on</string>
     <string name="set_to_time">Event ends at</string>
+
+
+    <!-- Strings related to navigation drawer -->
+    <string name="mygigs">My GiGs</string>
+    <string name="logout">Logout</string>
+    <string name="personal">Personal</string>
+    <string name="filter">Filter</string>
+    <string name="city">City</string>
+    <string name="genre">Genre</string>
+
 </resources>
