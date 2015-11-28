@@ -322,8 +322,8 @@ public class ServerRequest
                     String age = jsonChildNode.optString("AGE_RESTRICTION");
                     String fromDate = jsonChildNode.optString("START_DATE");
                     String toDate = jsonChildNode.optString("END_DATE");
-                    String fromTime = jsonChildNode.optString("FROM_TIME");
-                    String toTime = jsonChildNode.optString("TO_TIME");
+                    String fromTime = jsonChildNode.optString("START_TIME");
+                    String toTime = jsonChildNode.optString("END_TIME");
                     //String eventId, String eventName, String genre, String address, String phoneNumber, String charge, String beverage, String food, String city, String privateEvent, String age, String fromDate, String toDate, String fromTime, String toTime)
                     events[i]= new Event(event_id, event_name, genre, address, phoneNumber, charge, beverage, food, city, privateEvent, age, fromDate, toDate, fromTime, toTime);
 
