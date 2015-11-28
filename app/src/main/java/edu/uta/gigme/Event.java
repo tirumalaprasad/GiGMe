@@ -1,25 +1,42 @@
 package edu.uta.gigme;
 
+import android.widget.TextView;
+
+import java.io.Serializable;
+
 /**
  * Created by Siddharth Shah on 11/1/2015.
  */
-public class Event
+public class Event implements Serializable
 {
+
     String eventId;
     String eventName;
     String emailId;
     String genre;
     String address;
     String phoneNumber;
+    String charge;
+    String beverage, food, city, privateEvent, age, fromDate, fromTime, toDate, toTime;
 
-    public Event(String eventId, String eventName/*, String genre, String address, String phoneNumber*/)
+    public Event(String eventId, String eventName, String genre, String address, String phoneNumber, String charge, String beverage, String food, String city, String privateEvent, String age, String fromDate, String toDate, String fromTime, String toTime)
     {
         this.eventId = eventId;
         this.eventName = eventName;
         //this.emailId = emailId;
-        //this.genre = genre;
-        //this.address = address;
-        //this.phoneNumber = phoneNumber;
+        this.genre = genre;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this. charge = charge;
+        this. beverage = beverage;
+        this. food = food;
+        this.city = city;
+        this.privateEvent = privateEvent;
+        this.age = age;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+        this.fromTime = fromTime;
+        this.toTime = toTime;
     }
 
     public Event()
@@ -27,15 +44,18 @@ public class Event
 
     }
 
+    @Override
     public String toString()
     {
         return this.eventName;
     }
 
-    /*public Event getEventById(int id)
+    public static Event findEventbyName(String s)
     {
-        Event e;
+        Event e = null;
+
+
 
         return e;
-    }*/
+    }
 }

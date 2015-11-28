@@ -73,6 +73,7 @@ public class ServerRequest
         new FetchUserDataAsyncTask(user, userCallBack).execute();
     }
 
+
     public class StoreUserDataAsyncTask extends AsyncTask<Void, Void, Void>
     {
         User user;
@@ -208,68 +209,6 @@ public class ServerRequest
     }
 
 
-    public class FetchEventDetails extends AsyncTask<Integer, Void, String>
-    {
-        public String jsonResult;
-
-        @Override
-        protected String doInBackground(Integer... params)
-        {
-            HttpClient httpClient = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost("");
-
-            try
-            {
-                System.out.println("Entered try "+httpPost);
-                HttpResponse httpResponse = httpClient.execute(httpPost);
-                //System.out.println("jsonResult before inputStream : "+jsonResult);
-                //System.out.println("httpResponse : "+httpResponse.getEntity().getContent());
-                jsonResult = inputStreamToString(httpResponse.getEntity().getContent()).toString();
-                //System.out.println("jsonResult after inputStream : "+jsonResult);
-            }
-
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        private StringBuilder inputStreamToString(InputStream content)
-        {
-            String rLine = "";
-            StringBuilder stringBuilder = new StringBuilder();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(content));
-            try
-            {
-                System.out.println("in try of inputStreamToString");
-                while((rLine = bufferedReader.readLine()) != null)
-                {
-                    //System.out.println("in while loop : ");
-                    stringBuilder.append(rLine);
-                    System.out.println("rLine" + rLine);
-                }
-            }
-
-            catch (ConnectException e)
-            {
-                System.out.println("ConnectException");
-            }
-
-            catch (IOException e)
-            {
-                System.out.println("IOException");
-                e.printStackTrace();
-            }
-            System.out.println("stringBuilder : "+stringBuilder);
-            return stringBuilder;
-        }
-
-
-
-    }
-
-
     public final String url = "http://omega.uta.edu/~sbs5577/getList.php";
 
     public class fetchEventListAsyncTask extends AsyncTask<String, Void, String>
@@ -371,8 +310,22 @@ public class ServerRequest
                     JSONObject jsonChildNode = jsonArray.getJSONObject(i);
                     String event_name = jsonChildNode.optString("EVENT_NAME");
                     String event_id = jsonChildNode.optString("EVENT_ID");
-
-                    events[i]= new Event(event_id, event_name);
+                    //String emailId = jsonChildNode.optString("EMAIL_ID");
+                    String genre = jsonChildNode.optString("GENRE");
+                    String address = jsonChildNode.optString("ADDRESS");
+                    String phoneNumber = jsonChildNode.optString("PHONE_NUMBER");
+                    String charge = jsonChildNode.optString("EVENT_FEES");
+                    String beverage = jsonChildNode.optString("DRINKS");
+                    String food = jsonChildNode.optString("FOOD");
+                    String city = jsonChildNode.optString("CITY");
+                    String privateEvent = jsonChildNode.optString("EVENT_TYPE");
+                    String age = jsonChildNode.optString("AGE_RESTRICTION");
+                    String fromDate = jsonChildNode.optString("START_DATE");
+                    String toDate = jsonChildNode.optString("END_DATE");
+                    String fromTime = jsonChildNode.optString("FROM_TIME");
+                    String toTime = jsonChildNode.optString("TO_TIME");
+                    //String eventId, String eventName, String genre, String address, String phoneNumber, String charge, String beverage, String food, String city, String privateEvent, String age, String fromDate, String toDate, String fromTime, String toTime)
+                    events[i]= new Event(event_id, event_name, genre, address, phoneNumber, charge, beverage, food, city, privateEvent, age, fromDate, toDate, fromTime, toTime);
 
                     String event_output = event_name;// + "-" +event_id;
 
@@ -389,7 +342,7 @@ public class ServerRequest
 
             System.out.println("getContext:" + context.getApplicationContext());
 
-            /*
+
             SimpleAdapter simpleAdapter = new SimpleAdapter
                     (
                     context.getApplicationContext(),
@@ -398,9 +351,9 @@ public class ServerRequest
                     new String[]{"all_events"},
                     new int[] {R.id.tv_list}
                     );
-            */
 
-            ArrayAdapter<Event> event = new ArrayAdapter<Event>(context.getApplicationContext(), R.layout.custom_textview, R.id.tv_list, events);
+
+            ArrayAdapter<Event> event = new ArrayAdapter<Event>(context.getApplicationContext(), R.layout.custom_textview, events);
             listView.setAdapter(event);
             pd2.dismiss();
         }
@@ -414,9 +367,194 @@ public class ServerRequest
         }
     }
 
+
+
+    //trying to get event object from event name
+
+
+    public void fetchEventDataInBackground(Context c, String s)
+    {
+        progressDialog.show();
+        new FetchEventDataAsyncTask(c, s).execute();
+    }
+
+
+    public class FetchEventDataAsyncTask extends AsyncTask<String, Void, String>
+    {
+        public Context context;
+        //Activity activity;
+        public String jsonResult;
+
+        public ListView listView;
+
+        ProgressDialog pd2;
+
+
+        public FetchEventDataAsyncTask(Context context, String s)
+        {
+            this.context = context;
+            //this.activity = activity;
+            //listView = (ListView)this.activity.findViewById(R.id.listEvents);
+            pd2 = new ProgressDialog(context);
+            pd2.setMessage("Loading event data");
+            pd2.setCancelable(false);
+            pd2.show();
+        }
+
+        //Events events;
+        @Override
+        protected String doInBackground(String... strings)
+        {
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(strings[0]);
+
+            try
+            {
+                System.out.println("Entered try "+httpPost);
+                HttpResponse httpResponse = httpClient.execute(httpPost);
+                //System.out.println("jsonResult before inputStream : "+jsonResult);
+                //System.out.println("httpResponse : "+httpResponse.getEntity().getContent());
+                jsonResult = inputStreamToString(httpResponse.getEntity().getContent()).toString();
+                //System.out.println("jsonResult after inputStream : "+jsonResult);
+            }
+
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        private StringBuilder inputStreamToString(InputStream content)
+        {
+            String rLine = "";
+            StringBuilder stringBuilder = new StringBuilder();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(content));
+            try
+            {
+                System.out.println("in try of inputStreamToString");
+                while((rLine = bufferedReader.readLine()) != null)
+                {
+                    //System.out.println("in while loop : ");
+                    stringBuilder.append(rLine);
+                    System.out.println("rLine" + rLine);
+                }
+            }
+
+            catch (ConnectException e)
+            {
+                System.out.println("ConnectException");
+            }
+
+            catch (IOException e)
+            {
+                System.out.println("IOException");
+                e.printStackTrace();
+            }
+            System.out.println("stringBuilder : " + stringBuilder);
+            return stringBuilder;
+        }
+    }
+
+
+
+
+
+
+
+
     public void accessWebService(Context context, Activity activity)
     {
         fetchEventListAsyncTask jsonReadTask = new fetchEventListAsyncTask(context, activity);
         jsonReadTask.execute(new String[]{url});
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+    public class FetchEventDetails extends AsyncTask<Integer, Void, String>
+    {
+        public String jsonResult;
+
+        @Override
+        protected String doInBackground(Integer... params)
+        {
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost("");
+
+            try
+            {
+                System.out.println("Entered try "+httpPost);
+                HttpResponse httpResponse = httpClient.execute(httpPost);
+                //System.out.println("jsonResult before inputStream : "+jsonResult);
+                //System.out.println("httpResponse : "+httpResponse.getEntity().getContent());
+                jsonResult = inputStreamToString(httpResponse.getEntity().getContent()).toString();
+                //System.out.println("jsonResult after inputStream : "+jsonResult);
+            }
+
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        private StringBuilder inputStreamToString(InputStream content)
+        {
+            String rLine = "";
+            StringBuilder stringBuilder = new StringBuilder();
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(content));
+            try
+            {
+                System.out.println("in try of inputStreamToString");
+                while((rLine = bufferedReader.readLine()) != null)
+                {
+                    //System.out.println("in while loop : ");
+                    stringBuilder.append(rLine);
+                    System.out.println("rLine" + rLine);
+                }
+            }
+
+            catch (ConnectException e)
+            {
+                System.out.println("ConnectException");
+            }
+
+            catch (IOException e)
+            {
+                System.out.println("IOException");
+                e.printStackTrace();
+            }
+            System.out.println("stringBuilder : "+stringBuilder);
+            return stringBuilder;
+        }
+
+
+
+    }
+
+    */

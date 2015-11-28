@@ -8,6 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.Serializable;
 
 public class ViewEventDetails extends AppCompatActivity implements View.OnClickListener
 {
@@ -19,12 +22,18 @@ public class ViewEventDetails extends AppCompatActivity implements View.OnClickL
             tveventCity, tveventGenre, tveventPrivate,
             tveventAge, tveventFromDate, tveventFromTime,
             tveventToDate, tveventToTime;
+
     Button btnViewContact, btnViewOnMaps;
 
     public ViewEventDetails()
     {
+
+    }
+
+    public ViewEventDetails(Event event)
+    {
         serverRequest = new ServerRequest(this);
-        event = new Event();
+        this.event = event;
     }
 
     @Override
@@ -35,7 +44,7 @@ public class ViewEventDetails extends AppCompatActivity implements View.OnClickL
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -44,9 +53,10 @@ public class ViewEventDetails extends AppCompatActivity implements View.OnClickL
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
         //this is my code
+
             tveventName = (TextView) findViewById(R.id.tvEventName);
             tveventAddress = (TextView) findViewById(R.id.tvEventAddress);
             tveventPhone = (TextView) findViewById(R.id.tvEventHostPhoneNumber);
@@ -62,8 +72,46 @@ public class ViewEventDetails extends AppCompatActivity implements View.OnClickL
                 tveventToDate = (TextView) findViewById(R.id.tv_to_date);
                 tveventToTime = (TextView) findViewById(R.id.tv_to_time);
 
+        btnViewContact = (Button) findViewById(R.id.btContact);
+        btnViewOnMaps = (Button) findViewById(R.id.btMaps);
+
         btnViewOnMaps.setOnClickListener(this);
         btnViewContact.setOnClickListener(this);
+
+
+        //fetch the name of the event that userclicked, and was passed through the intent.putExtra in AllEventsActivity
+
+        Event fetchedEvent;
+
+        if (savedInstanceState == null)
+        {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null)
+            {
+                fetchedEvent= null;
+            }
+            else
+            {
+                fetchedEvent = (Event)extras.get("fetchedEvent");
+                Toast.makeText(ViewEventDetails.this, fetchedEvent.toString(), Toast.LENGTH_SHORT).show();
+                tveventName.setText(fetchedEvent.eventName);
+                tveventCity.setText(fetchedEvent.city);
+                tveventCharge.setText(fetchedEvent.charge);
+                tveventFood.setText(fetchedEvent.food);
+                tveventGenre.setText(fetchedEvent.genre);
+                tveventPrivate.setText(fetchedEvent.privateEvent);
+                tveventAge.setText(fetchedEvent.age);
+                tveventFromDate.setText(fetchedEvent.fromDate);
+                tveventToDate.setText(fetchedEvent.toDate);
+                tveventFromTime.setText(fetchedEvent.fromTime);
+                tveventToTime.setText(fetchedEvent.toTime);
+            }
+        }
+        else
+        {
+            fetchedEvent = (Event)savedInstanceState.getSerializable("asdf");
+            //Toast.makeText(ViewEventDetails.this, fetchedEvent.toString(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

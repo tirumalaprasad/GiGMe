@@ -12,7 +12,8 @@ import android.widget.Toast;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener
+{
 
     // UI references.
     private AutoCompleteTextView mEmailTextView;
@@ -38,8 +39,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
             case R.id.btn_login:
                 String mEmail = mEmailTextView.getText().toString();
                 String mPassword = mPasswordTextView.getText().toString();
@@ -68,7 +71,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void authenticate(User user)
     {
         ServerRequest serverRequest = new ServerRequest(this);
-        serverRequest.fetchUserDataInBackground(user, new GetUserCallBack(){
+        serverRequest.fetchUserDataInBackground(user, new GetUserCallBack()
+        {
             @Override
             public void done(User returnedUser)
             {
@@ -106,7 +110,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed()
+    {
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -66,6 +66,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.uta.gigme.AllEventsActivity" />
         </activity>
+
         <activity
             android:name=".ViewEventDetails"
             android:label="@string/title_activity_view_event_details"

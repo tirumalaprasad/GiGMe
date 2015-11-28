@@ -22,13 +22,19 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
+import java.io.Serializable;
+
 public class AllEventsActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener
+{
     TextView mName, mEmail;
     UserLocalStore userLocalStore;
     public ProgressDialog progressDialog;
     ListView listView;
 
+    public String fetchedEventName;
+
+    public Event fetchedEvent;
 
 
     @Override
@@ -70,18 +76,19 @@ public class AllEventsActivity extends AppCompatActivity
 
         listView = (ListView) findViewById(R.id.listEvents);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
             @Override
-            public void onItemClick(AdapterView<?> view, View v, int position,
-                                    long id) {
-
+            public void onItemClick(AdapterView<?> view, View v, int position, long id)
+            {
                 //String selected = ((TextView) v.findViewById(R.id.)).getText().toString()
+                fetchedEvent = (Event) listView.getItemAtPosition(position);//((TextView)view.findViewById(R.id.tv_list)).getText().toString();
 
-                String temp = ((TextView)view.findViewById(R.id.tv_list)).getText().toString();
-                Toast.makeText(AllEventsActivity.this, temp , Toast.LENGTH_LONG).show();
-                //Intent intent = new Intent(AllEventsActivity.this, ViewEventDetails.class);
-
-                //startActivity(intent);
+                //ViewEventDetails viewEventDetails = new ViewEventDetails(e);
+                //Toast.makeText(AllEventsActivity.this, fetchedEventName , Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(AllEventsActivity.this, ViewEventDetails.class);
+                intent.putExtra("fetchedEvent", (Serializable)fetchedEvent);
+                startActivity(intent);
             }
         });
     }
