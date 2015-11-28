@@ -1,5 +1,7 @@
 package edu.uta.gigme;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,7 +17,7 @@ import java.io.Serializable;
 public class ViewEventDetails extends AppCompatActivity implements View.OnClickListener
 {
     ServerRequest serverRequest;
-    Event event;
+    Event fetchedEvent;
 
     TextView tveventName, tveventAddress, tveventPhone,
             tveventCharge, tveventBeverage, tveventFood,
@@ -33,7 +35,6 @@ public class ViewEventDetails extends AppCompatActivity implements View.OnClickL
     public ViewEventDetails(Event event)
     {
         serverRequest = new ServerRequest(this);
-        this.event = event;
     }
 
     @Override
@@ -81,7 +82,7 @@ public class ViewEventDetails extends AppCompatActivity implements View.OnClickL
 
         //fetch the name of the event that userclicked, and was passed through the intent.putExtra in AllEventsActivity
 
-        Event fetchedEvent;
+
 
         if (savedInstanceState == null)
         {
@@ -117,6 +118,22 @@ public class ViewEventDetails extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v)
     {
-
+        switch (v.getId())
+        {
+            case R.id.btContact:
+                AlertDialog alertDialog = new AlertDialog.Builder(ViewEventDetails.this).create();
+                alertDialog.setTitle("Organizer contact");
+                alertDialog.setMessage(fetchedEvent.phoneNumber);
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                alertDialog.show();
+                break;
+            default:
+                break;
+        }
     }
 }
