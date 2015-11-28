@@ -13,14 +13,13 @@
     tools:showIn="@layout/app_bar_all_events">
 
     <ListView
+        android:id="@+id/listEvents"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listEvents"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="14dp"
         >
 
     </ListView>
-
 </RelativeLayout>

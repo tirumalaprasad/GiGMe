@@ -18,9 +18,9 @@ import android.widget.TextView;
 
 public class AllEventsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    public ProgressDialog progressDialog;
     TextView mName, mEmail;
     UserLocalStore userLocalStore;
-    public ProgressDialog progressDialog;
     ListView listView;
 
     @Override
@@ -96,9 +96,7 @@ public class AllEventsActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -111,11 +109,15 @@ public class AllEventsActivity extends AppCompatActivity
 
         if (id == R.id.nav_city) {
 
+
         } else if (id == R.id.nav_genre) {
+
 
         } else if (id == R.id.nav_filter) {
 
+
         }  else if (id == R.id.nav_mygigs) {
+
 
         } else if (id == R.id.nav_logout) {
 

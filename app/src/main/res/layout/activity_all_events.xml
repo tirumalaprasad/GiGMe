@@ -23,6 +23,7 @@
         app:menu="@menu/activity_all_events_drawer"
         >
 
+
     </android.support.design.widget.NavigationView>
 
 

@@ -24,7 +24,7 @@
         <item>Rock</item>
         <item>Pop</item>
         <item>EDM</item>
-        <item>Psychaedelic</item>
+        <item>Psychedelic</item>
     </string-array>
 
     <!-- Strings related to login -->
@@ -56,7 +56,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_all_events">AllEventsActivity</string>
-    <string name="title_add_event">Add an event..</string>
+    <string name="title_add_event">Add an event</string>
     <string name="event_name">Event Name</string>
     <string name="event_address">Event Address</string>
     <string name="event_cover_charge">Event Cover Charge</string>
@@ -78,5 +78,6 @@
     <string name="filter">Filter</string>
     <string name="city">City</string>
     <string name="genre">Genre</string>
+    <string name="mypref">My preference</string>
 
 </resources>
