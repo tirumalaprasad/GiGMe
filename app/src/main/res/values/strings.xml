@@ -70,4 +70,7 @@
     <string name="set_to_date">Event ends on</string>
     <string name="set_to_time">Event ends at</string>
     <string name="title_activity_view_event_details">ViewEventDetails</string>
+    <string name="title_activity_view_on_map">ViewOnMap</string>
+    <string name="title_activity_view_on_maps">Map</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

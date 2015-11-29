@@ -14,7 +14,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //resValue "string", "google_maps_api_key", "AIzaSyDGLP9V0s_Q0-APQv77_utAUMCyEHP_2K4"
         }
+        /*debug {
+            resValue "string", "google_maps_api_key", "AIzaSyDGLP9V0s_Q0-APQv77_utAUMCyEHP_2K4"
+        }*/
     }
     productFlavors {
     }
@@ -23,7 +27,9 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
-    compile 'com.android.support:design:23.0.1'
+    compile 'com.android.support:design:23.1.1'
+    compile 'com.android.support:support-v4:23.1.1'
+    compile 'com.google.android.gms:play-services:8.3.0'
 }

@@ -39,12 +39,6 @@ import java.util.Map;
  * Created by Siddharth Shah on 9/18/2015.
  */
 
-/*
-$mysql_host = "mysql2.000webhost.com";
-$mysql_database = "a9686140_testdb";
-$mysql_user = "a9686140_testdb";
-$mysql_password = "testing123";
- */
 
 public class ServerRequest
 {
@@ -366,100 +360,6 @@ public class ServerRequest
             return eventNameId;
         }
     }
-
-
-
-    //trying to get event object from event name
-
-
-    public void fetchEventDataInBackground(Context c, String s)
-    {
-        progressDialog.show();
-        new FetchEventDataAsyncTask(c, s).execute();
-    }
-
-
-    public class FetchEventDataAsyncTask extends AsyncTask<String, Void, String>
-    {
-        public Context context;
-        //Activity activity;
-        public String jsonResult;
-
-        public ListView listView;
-
-        ProgressDialog pd2;
-
-
-        public FetchEventDataAsyncTask(Context context, String s)
-        {
-            this.context = context;
-            //this.activity = activity;
-            //listView = (ListView)this.activity.findViewById(R.id.listEvents);
-            pd2 = new ProgressDialog(context);
-            pd2.setMessage("Loading event data");
-            pd2.setCancelable(false);
-            pd2.show();
-        }
-
-        //Events events;
-        @Override
-        protected String doInBackground(String... strings)
-        {
-            HttpClient httpClient = new DefaultHttpClient();
-            HttpPost httpPost = new HttpPost(strings[0]);
-
-            try
-            {
-                System.out.println("Entered try "+httpPost);
-                HttpResponse httpResponse = httpClient.execute(httpPost);
-                //System.out.println("jsonResult before inputStream : "+jsonResult);
-                //System.out.println("httpResponse : "+httpResponse.getEntity().getContent());
-                jsonResult = inputStreamToString(httpResponse.getEntity().getContent()).toString();
-                //System.out.println("jsonResult after inputStream : "+jsonResult);
-            }
-
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        private StringBuilder inputStreamToString(InputStream content)
-        {
-            String rLine = "";
-            StringBuilder stringBuilder = new StringBuilder();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(content));
-            try
-            {
-                System.out.println("in try of inputStreamToString");
-                while((rLine = bufferedReader.readLine()) != null)
-                {
-                    //System.out.println("in while loop : ");
-                    stringBuilder.append(rLine);
-                    System.out.println("rLine" + rLine);
-                }
-            }
-
-            catch (ConnectException e)
-            {
-                System.out.println("ConnectException");
-            }
-
-            catch (IOException e)
-            {
-                System.out.println("IOException");
-                e.printStackTrace();
-            }
-            System.out.println("stringBuilder : " + stringBuilder);
-            return stringBuilder;
-        }
-    }
-
-
-
-
-
 
 
 

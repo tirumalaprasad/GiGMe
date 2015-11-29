@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +42,9 @@ public class AllEventsActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+        //setContentView(R.layout.nav_header_all_events);
+
         setContentView(R.layout.activity_all_events);
         mName = (TextView) findViewById(R.id.tv_name);
         mEmail = (TextView) findViewById(R.id.tv_email);
@@ -48,8 +52,9 @@ public class AllEventsActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         userLocalStore = new UserLocalStore(this);
         User user = userLocalStore.getLoggedInUser();
-        mName.setText(user.name);
-        mEmail.setText(user.email);
+        //mName.setText(user.name);
+        //mEmail.setText(user.email);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +74,7 @@ public class AllEventsActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
         //this is to list the events
         ServerRequest serverRequest = new ServerRequest(this);

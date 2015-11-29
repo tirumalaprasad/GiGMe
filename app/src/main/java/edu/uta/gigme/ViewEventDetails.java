@@ -1,7 +1,9 @@
+//API key : AIzaSyC6y6eaIsow8BV0pkaw45l4PgGt-6_TseM
 package edu.uta.gigme;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -110,7 +112,7 @@ public class ViewEventDetails extends AppCompatActivity implements View.OnClickL
         }
         else
         {
-            fetchedEvent = (Event)savedInstanceState.getSerializable("asdf");
+            fetchedEvent = (Event)savedInstanceState.getSerializable("fetchedEvent");
             //Toast.makeText(ViewEventDetails.this, fetchedEvent.toString(), Toast.LENGTH_SHORT).show();
         }
     }
@@ -132,6 +134,13 @@ public class ViewEventDetails extends AppCompatActivity implements View.OnClickL
                         });
                 alertDialog.show();
                 break;
+
+            case R.id.btMaps:
+                Intent intent = new Intent(ViewEventDetails.this, MapsActivity.class);
+                intent.putExtra("address", fetchedEvent.address);
+                startActivity(intent);
+
+
             default:
                 break;
         }
