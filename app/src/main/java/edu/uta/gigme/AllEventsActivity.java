@@ -257,7 +257,7 @@ public class AllEventsActivity extends AppCompatActivity implements NavigationVi
                         Toast.LENGTH_SHORT).show();
 
 
-                //Toast.makeText(getApplicationContext(), getSelectedCity()+" "+getSelectedGenre(),Toast.LENGTH_SHORT);
+                //Toast.makeText(getApplicationContext(), getSelectedCity()+" "+getSelectedGenre(),Toast.LENGTH_SHORT).show();
                 serverRequest.accessWebService(getSelectedCity(), getSelectedGenre().substring(0, getSelectedGenre().length()-1), this, this);
             }
 
