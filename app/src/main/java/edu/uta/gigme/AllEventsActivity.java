@@ -23,8 +23,7 @@ import android.widget.Toast;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class AllEventsActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener
+public class AllEventsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
     TextView mName, mEmail;
     UserLocalStore userLocalStore;
@@ -33,13 +32,12 @@ public class AllEventsActivity extends AppCompatActivity
     String SelectedCity = null;
     String SelectedGenre = null;
     ArrayList<Integer> selectedGenreList;
+    public ServerRequest serverRequest;
 
-    public String fetchedEventName;
 
     public Event fetchedEvent;
 
-
-    @Override
+        @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -55,7 +53,6 @@ public class AllEventsActivity extends AppCompatActivity
         User user = userLocalStore.getLoggedInUser();
         // mName.setText(user.name);
         // mEmail.setText(user.email);
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -78,8 +75,7 @@ public class AllEventsActivity extends AppCompatActivity
 
 
         //this is to list the events
-        ServerRequest serverRequest = new ServerRequest(this);
-        serverRequest.accessWebService(this, this);
+        serverRequest = new ServerRequest(this);
 
         listView = (ListView) findViewById(R.id.listEvents);
 
@@ -104,9 +100,13 @@ public class AllEventsActivity extends AppCompatActivity
     public void onBackPressed()
     {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
+        if (drawer.isDrawerOpen(GravityCompat.START))
+        {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
+        }
+
+        else
+        {
             super.onBackPressed();
         }
     }
@@ -177,7 +177,9 @@ public class AllEventsActivity extends AppCompatActivity
             b.show();
 
 
-        } else if (id == R.id.nav_genre) {
+        }
+        else if (id == R.id.nav_genre)
+        {
 
             selectedGenreList = new ArrayList<>();
             final boolean[] isSelectedGenre = {false,false,false,false,false};
@@ -186,7 +188,8 @@ public class AllEventsActivity extends AppCompatActivity
                     .setMultiChoiceItems(R.array.genre_arrays, isSelectedGenre, new DialogInterface.OnMultiChoiceClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-                                    if (isChecked) {
+                                    if (isChecked)
+                                    {
                                         selectedGenreList.add(which);
                                         SelectedGenre = " ";
 
@@ -222,6 +225,7 @@ public class AllEventsActivity extends AppCompatActivity
                 if(SelectedGenre==null){
                     Toast.makeText(getApplicationContext(), "Select your City and Genre preference",
                             Toast.LENGTH_SHORT).show();
+
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "Select your City preference",
@@ -244,6 +248,9 @@ public class AllEventsActivity extends AppCompatActivity
                 Toast.makeText(getApplicationContext(), "Filtering Events",
                         Toast.LENGTH_SHORT).show();
                 buildPreferenceList();
+
+                //Toast.makeText(getApplicationContext(), getSelectedCity()+" "+getSelectedGenre(),Toast.LENGTH_SHORT).show();
+                serverRequest.accessWebService(getSelectedCity(), getSelectedGenre().substring(0, getSelectedGenre().length()-1), this, this);
             }
 
         }  else if (id == R.id.nav_mygigs) {
@@ -284,7 +291,8 @@ public class AllEventsActivity extends AppCompatActivity
         return userLocalStore.getUserLoggedIn();
     }
 
-    public String getSelectedCity(){
+    public String getSelectedCity()
+    {
         return SelectedCity;
     }
 
@@ -299,29 +307,31 @@ public class AllEventsActivity extends AppCompatActivity
     String[] genreStringArray = new String[]{"Metal","Rock","Pop","EDM","Psychedelic"};
     void buildPreferenceList(){
         StringBuilder sb = new StringBuilder(5);
-        for (Integer i: selectedGenreList) {
+        for (Integer i: selectedGenreList)
+        {
 
         String x = i.toString();
-        switch (x){
+        switch (x)
+        {
             case "0":
-                sb.append(genreStringArray[0]+" ");
+                sb.append(genreStringArray[0]+",");
                 break;
             case "1":
-                sb.append(genreStringArray[1]+" ");
+                sb.append(genreStringArray[1]+",");
                 break;
             case "2":
-                sb.append(genreStringArray[2]+" ");
+                sb.append(genreStringArray[2]+",");
                 break;
             case "3":
-                sb.append(genreStringArray[3]+" ");
+                sb.append(genreStringArray[3]+",");
                 break;
             case "4":
-                sb.append(genreStringArray[4]+" ");
+                sb.append(genreStringArray[4]+",");
                 break;
             default:
                 i = 0;
         }
-        }
+     }
 
         //Toast.makeText(getApplicationContext(), sb.toString(),Toast.LENGTH_SHORT).show();
         setSelectedGenre(sb.toString());

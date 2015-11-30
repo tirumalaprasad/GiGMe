@@ -442,24 +442,24 @@ public class ServerRequest
 
 
 
-
-
     public class fetchEventListAsyncTask extends AsyncTask<String, Void, String>
     {
 
         public Context context;
         Activity activity;
-        public String jsonResult;
+        public String jsonResult, selectedCity, selectedGenres;
 
         public ListView listView;
 
         ProgressDialog pd2;
 
 
-        public fetchEventListAsyncTask(Context context, Activity activity)
+        public fetchEventListAsyncTask(String selectedCity, String selectedGenres, Context context, Activity activity)
         {
             this.context = context;
             this.activity = activity;
+            this.selectedCity = selectedCity;
+            this.selectedGenres = selectedGenres;
             url = SERVER_ADDRESS + "getList.php";
             listView = (ListView)this.activity.findViewById(R.id.listEvents);
             pd2 = new ProgressDialog(context);
@@ -472,11 +472,22 @@ public class ServerRequest
         @Override
         protected String doInBackground(String... strings)
         {
-            HttpClient httpClient = new DefaultHttpClient();
+            ArrayList<NameValuePair> dataToSend = new ArrayList<>();
+            dataToSend.add(new BasicNameValuePair("selectedCity", selectedCity));
+            dataToSend.add(new BasicNameValuePair("selectedGenres", selectedGenres));
+
+            HttpParams httpRequestParams = new BasicHttpParams();
+            HttpConnectionParams.setConnectionTimeout(httpRequestParams, CONNECTION_TIMEOUT);
+            HttpConnectionParams.setSoTimeout(httpRequestParams, CONNECTION_TIMEOUT);
+
+            HttpClient httpClient = new DefaultHttpClient(httpRequestParams);
             HttpPost httpPost = new HttpPost(strings[0]);
 
             try
             {
+                httpPost.setEntity(new UrlEncodedFormEntity(dataToSend));
+                httpClient.execute(httpPost);
+
                 System.out.println("Entered try "+httpPost);
                 HttpResponse httpResponse = httpClient.execute(httpPost);
                 //System.out.println("jsonResult before inputStream : "+jsonResult);
@@ -518,7 +529,7 @@ public class ServerRequest
                 System.out.println("IOException");
                 e.printStackTrace();
             }
-            System.out.println("stringBuilder : "+stringBuilder);
+            System.out.println("stringBuilder : " + stringBuilder);
             return stringBuilder;
         }
 
@@ -538,38 +549,44 @@ public class ServerRequest
                 JSONArray jsonArray = jsonResponse.getJSONArray("events");
                 System.out.println("jsonArray.length()"+jsonArray.length());
 
-                events = new Event[jsonArray.length()];
-
-                for (int i = 0; i < jsonArray.length(); i++)
+                if (jsonArray.length() == 0)
                 {
-                    JSONObject jsonChildNode = jsonArray.getJSONObject(i);
-                    String event_name = jsonChildNode.optString("EVENT_NAME");
-                    String event_id = jsonChildNode.optString("EVENT_ID");
-                    String emailId = jsonChildNode.optString("EMAIL_ID");
-                    String genre = jsonChildNode.optString("GENRE");
-                    String address = jsonChildNode.optString("ADDRESS");
-                    String phoneNumber = jsonChildNode.optString("PHONE_NUMBER");
-                    String charge = jsonChildNode.optString("EVENT_FEES");
-                    String beverage = jsonChildNode.optString("DRINKS");
-                    String food = jsonChildNode.optString("FOOD");
-                    String city = jsonChildNode.optString("CITY");
-                    String privateEvent = jsonChildNode.optString("EVENT_TYPE");
-                    String age = jsonChildNode.optString("AGE_RESTRICTION");
-                    String fromDate = jsonChildNode.optString("START_DATE");
-                    String toDate = jsonChildNode.optString("END_DATE");
-                    String fromTime = jsonChildNode.optString("START_TIME");
-                    String toTime = jsonChildNode.optString("END_TIME");
-                    //String eventId, String eventName, String genre, String address, String phoneNumber, String charge, String beverage, String food, String city, String privateEvent, String age, String fromDate, String toDate, String fromTime, String toTime)
-                    events[i]= new Event(Integer.parseInt(event_id), event_name, genre,
-                            address, phoneNumber, charge, beverage, food, city,
-                            privateEvent, age, fromDate, toDate, fromTime, toTime);
 
-                    String event_output = event_name;// + "-" +event_id;
-
-                    eventList.add(createEventHashmap("all_events" ,event_output));
-                    System.out.println("eventlist : "+eventList);
                 }
-            }
+
+                else {
+                    events = new Event[jsonArray.length()];
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        JSONObject jsonChildNode = jsonArray.getJSONObject(i);
+                        String event_name = jsonChildNode.optString("EVENT_NAME");
+                        String event_id = jsonChildNode.optString("EVENT_ID");
+                        String emailId = jsonChildNode.optString("EMAIL_ID");
+                        String genre = jsonChildNode.optString("GENRE");
+                        String address = jsonChildNode.optString("ADDRESS");
+                        String phoneNumber = jsonChildNode.optString("PHONE_NUMBER");
+                        String charge = jsonChildNode.optString("EVENT_FEES");
+                        String beverage = jsonChildNode.optString("DRINKS");
+                        String food = jsonChildNode.optString("FOOD");
+                        String city = jsonChildNode.optString("CITY");
+                        String privateEvent = jsonChildNode.optString("EVENT_TYPE");
+                        String age = jsonChildNode.optString("AGE_RESTRICTION");
+                        String fromDate = jsonChildNode.optString("START_DATE");
+                        String toDate = jsonChildNode.optString("END_DATE");
+                        String fromTime = jsonChildNode.optString("START_TIME");
+                        String toTime = jsonChildNode.optString("END_TIME");
+                        //String eventId, String eventName, String genre, String address, String phoneNumber, String charge, String beverage, String food, String city, String privateEvent, String age, String fromDate, String toDate, String fromTime, String toTime)
+                        events[i] = new Event(Integer.parseInt(event_id), event_name, genre,
+                                address, phoneNumber, charge, beverage, food, city,
+                                privateEvent, age, fromDate, toDate, fromTime, toTime);
+
+                        String event_output = event_name;// + "-" +event_id;
+
+                        eventList.add(createEventHashmap("all_events", event_output));
+                        System.out.println("eventlist : " + eventList);
+                        }
+                    }
+                }
 
             catch (JSONException e)
             {
@@ -588,11 +605,19 @@ public class ServerRequest
                     new String[]{"all_events"},
                     new int[] {R.id.tv_list}
                     );
-*/
+             */
 
-            ArrayAdapter<Event> event = new ArrayAdapter<Event>(context.getApplicationContext(), R.layout.custom_textview, events);
-            listView.setAdapter(event);
-            pd2.dismiss();
+            if (events == null)
+            {
+                pd2.dismiss();
+            }
+
+            else
+            {
+                ArrayAdapter<Event> event = new ArrayAdapter<Event>(context.getApplicationContext(), R.layout.custom_textview, events);
+                listView.setAdapter(event);
+                pd2.dismiss();
+            }
         }
 
         private Map<String, String> createEventHashmap(String key_name, String event_output)
@@ -668,9 +693,9 @@ public class ServerRequest
     }
 
 
-    public void accessWebService(Context context, Activity activity)
+    public void accessWebService(String selectedCity, String selectedGenres, Context context, Activity activity)
     {
-        fetchEventListAsyncTask jsonReadTask = new fetchEventListAsyncTask(context, activity);
+        fetchEventListAsyncTask jsonReadTask = new fetchEventListAsyncTask(selectedCity, selectedGenres, context, activity);
         jsonReadTask.execute(new String[]{url});
     }
 }
