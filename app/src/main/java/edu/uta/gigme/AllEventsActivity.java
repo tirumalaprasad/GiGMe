@@ -323,7 +323,7 @@ public class AllEventsActivity extends AppCompatActivity
         }
         }
 
-        Toast.makeText(getApplicationContext(), sb.toString(),Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), sb.toString(),Toast.LENGTH_SHORT).show();
         setSelectedGenre(sb.toString());
     }
 
