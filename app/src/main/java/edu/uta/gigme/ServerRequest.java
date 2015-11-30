@@ -551,7 +551,7 @@ public class ServerRequest
 
                 if (jsonArray.length() == 0)
                 {
-
+                    //do nothing
                 }
 
                 else {
@@ -609,11 +609,13 @@ public class ServerRequest
 
             if (events == null)
             {
+                //just dismiss the dialog box
                 pd2.dismiss();
             }
 
             else
             {
+                //make the array adapter and view the event list, then dismiss the dialog box
                 ArrayAdapter<Event> event = new ArrayAdapter<Event>(context.getApplicationContext(), R.layout.custom_textview, events);
                 listView.setAdapter(event);
                 pd2.dismiss();
