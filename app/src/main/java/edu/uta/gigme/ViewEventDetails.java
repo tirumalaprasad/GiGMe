@@ -5,16 +5,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.Serializable;
 
 public class ViewEventDetails extends AppCompatActivity implements View.OnClickListener
 {
@@ -97,17 +93,17 @@ public class ViewEventDetails extends AppCompatActivity implements View.OnClickL
             {
                 fetchedEvent = (Event)extras.get("fetchedEvent");
                 Toast.makeText(ViewEventDetails.this, fetchedEvent.toString(), Toast.LENGTH_SHORT).show();
-                tveventName.setText(fetchedEvent.eventName);
-                tveventCity.setText(fetchedEvent.city);
-                tveventCharge.setText(fetchedEvent.charge);
-                tveventFood.setText(fetchedEvent.food);
-                tveventGenre.setText(fetchedEvent.genre);
-                tveventPrivate.setText(fetchedEvent.privateEvent);
-                tveventAge.setText(fetchedEvent.age);
-                tveventFromDate.setText(fetchedEvent.fromDate);
-                tveventToDate.setText(fetchedEvent.toDate);
-                tveventFromTime.setText(fetchedEvent.fromTime);
-                tveventToTime.setText(fetchedEvent.toTime);
+                tveventName.setText("Event Name" + fetchedEvent.eventName);
+                tveventCity.setText("Event City"+fetchedEvent.city);
+                tveventCharge.setText("Event Charge"+fetchedEvent.charge);
+                tveventFood.setText("Event Food"+fetchedEvent.food);
+                tveventGenre.setText("Event Genre"+fetchedEvent.genre);
+                tveventPrivate.setText("Event Private"+fetchedEvent.privateEvent);
+                tveventAge.setText("Event Age"+fetchedEvent.age);
+                tveventFromDate.setText("Event From D"+fetchedEvent.fromDate);
+                tveventToDate.setText("Event To D"+fetchedEvent.toDate);
+                tveventFromTime.setText("Event From T"+fetchedEvent.fromTime);
+                tveventToTime.setText("Event To T"+fetchedEvent.toTime);
             }
         }
         else

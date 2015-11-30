@@ -73,4 +73,14 @@
     <string name="title_activity_view_on_map">ViewOnMap</string>
     <string name="title_activity_view_on_maps">Map</string>
     <string name="title_activity_maps">Map</string>
+    <string name="delete_selected_events">Delete selected event</string>
+    <string name="delete">Delete</string>
+    <string name="title_activity_my_gigs">Your Gigs</string>
+    <string name="beverage_type_prompt">Select beverage type</string>
+    <string name="create_event">Create event</string>
+    <string-array name="beverage_type_arrays">
+        <item>Alcohol</item>
+        <item>Non-alcohol</item>
+    </string-array>
+
 </resources>

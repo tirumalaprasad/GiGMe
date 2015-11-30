@@ -76,6 +76,16 @@
                 android:value="edu.uta.gigme.AllEventsActivity" />-->
         </activity>
         <activity
+            android:name=".MyGigsActivity"
+            android:label="@string/title_activity_my_gigs"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".AllEventsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.uta.gigme.AllEventsActivity" />
+
+        </activity>
+        <activity
             android:name=".ViewEventDetails"
             android:label="@string/title_activity_view_event_details"
             android:theme="@style/AppTheme.NoActionBar" />

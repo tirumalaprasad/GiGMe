@@ -6,11 +6,13 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -97,6 +99,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 LatLng test = new LatLng((float)a.getLatitude(), (float)a.getLongitude());
                 mMap.addMarker(new MarkerOptions().position(test).title("Test Marker"));
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(test));
+
+                CameraPosition cameraPosition = new CameraPosition.Builder()
+                        .target(test)      // Sets the center of the map to event address
+                        .zoom(19)                   // Sets the zoom
+                        .bearing(0)                // Sets the orientation of the camera to east
+                        .tilt(90)                   // Sets the tilt of the camera to 90 degrees
+                        .build();
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
+                mMap.animateCamera(cameraUpdate);
 
             }
         }
