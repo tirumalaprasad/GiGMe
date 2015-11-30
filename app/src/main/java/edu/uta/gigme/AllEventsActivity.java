@@ -141,6 +141,7 @@ public class AllEventsActivity extends AppCompatActivity implements NavigationVi
 
             AlertDialog.Builder b = new AlertDialog.Builder(this);
             b.setTitle("City");
+            SelectedCity = null;
             String[] types = {"Arlington", "Dallas","Fort Worth","Houston"};
             b.setItems(types, new DialogInterface.OnClickListener() {
 
@@ -184,6 +185,7 @@ public class AllEventsActivity extends AppCompatActivity implements NavigationVi
             selectedGenreList = new ArrayList<>();
             final boolean[] isSelectedGenre = {false,false,false,false,false};
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            SelectedGenre = null;
             builder.setTitle("Genre")
                     .setMultiChoiceItems(R.array.genre_arrays, isSelectedGenre, new DialogInterface.OnMultiChoiceClickListener() {
                                 @Override
