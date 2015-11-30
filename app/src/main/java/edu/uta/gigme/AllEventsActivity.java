@@ -175,9 +175,8 @@ public class AllEventsActivity extends AppCompatActivity implements NavigationVi
             });
 
             b.show();
-
-
         }
+
         else if (id == R.id.nav_genre)
         {
 
@@ -296,7 +295,8 @@ public class AllEventsActivity extends AppCompatActivity implements NavigationVi
         return SelectedCity;
     }
 
-    public void setSelectedGenre(String list){
+    public void setSelectedGenre(String list)
+    {
         SelectedGenre = list;
     }
 
@@ -332,9 +332,7 @@ public class AllEventsActivity extends AppCompatActivity implements NavigationVi
                 i = 0;
         }
      }
-
         //Toast.makeText(getApplicationContext(), sb.toString(),Toast.LENGTH_SHORT).show();
         setSelectedGenre(sb.toString());
     }
-
 }
