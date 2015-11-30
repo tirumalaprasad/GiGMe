@@ -1,6 +1,8 @@
 package edu.uta.gigme;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,8 +18,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class AllEventsActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
@@ -26,6 +30,9 @@ public class AllEventsActivity extends AppCompatActivity
     UserLocalStore userLocalStore;
     public ProgressDialog progressDialog;
     ListView listView;
+    String SelectedCity = null;
+    String SelectedGenre = null;
+    ArrayList<Integer> selectedGenreList;
 
     public String fetchedEventName;
 
@@ -119,9 +126,7 @@ public class AllEventsActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -130,23 +135,127 @@ public class AllEventsActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        final int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_city) {
 
-        } else if (id == R.id.nav_slideshow) {
+            AlertDialog.Builder b = new AlertDialog.Builder(this);
+            b.setTitle("City");
+            String[] types = {"Arlington", "Dallas","Fort Worth","Houston"};
+            b.setItems(types, new DialogInterface.OnClickListener() {
 
-        } else if (id == R.id.nav_manage) {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
 
-        } else if (id == R.id.nav_share) {
+                    dialog.dismiss();
+                    switch (which) {
+                        case 0:
+                            Toast.makeText(getApplicationContext(), "City Arlington Selected",
+                                    Toast.LENGTH_SHORT).show();
+                            SelectedCity = "Arlington";
+                            break;
+                        case 1:
+                            Toast.makeText(getApplicationContext(), "City Dallas Selected",
+                                    Toast.LENGTH_SHORT).show();
+                            SelectedCity = "Dallas";
+                            break;
+                        case 2:
+                            Toast.makeText(getApplicationContext(), "City Fort Worth Selected",
+                                    Toast.LENGTH_SHORT).show();
+                            SelectedCity = "Fort Worth";
+                            break;
+                        case 3:
+                            Toast.makeText(getApplicationContext(), "City Houston Selected",
+                                    Toast.LENGTH_SHORT).show();
+                            SelectedCity = "Houston";
+                            break;
+                    }
+                }
+
+            });
+
+            b.show();
+
+
+        } else if (id == R.id.nav_genre) {
+
+            selectedGenreList = new ArrayList<>();
+            final boolean[] isSelectedGenre = {false,false,false,false,false};
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Genre")
+                    .setMultiChoiceItems(R.array.genre_arrays, isSelectedGenre, new DialogInterface.OnMultiChoiceClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                                    if (isChecked) {
+                                        selectedGenreList.add(which);
+                                        SelectedGenre = " ";
+
+                                    } else if (selectedGenreList.contains(which)) {
+                                        selectedGenreList.remove(Integer.valueOf(which));
+                                    }
+                                }
+                            }
+                    );
+
+            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(getApplicationContext(),
+                            "Genre Selected",
+                            Toast.LENGTH_LONG)
+                            .show();
+                    selectedGenreList.add(which);
+
+                    dialog.dismiss();
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            builder.show();
+
+        } else if (id == R.id.nav_filter) {
+            if(SelectedCity==null){
+                if(SelectedGenre==null){
+                    Toast.makeText(getApplicationContext(), "Select your City and Genre preference",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Select your City preference",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            if(SelectedGenre==null){
+                if(SelectedCity==null){
+                    Toast.makeText(getApplicationContext(), "Select your City and Genre preference",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Select your Genre preference",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            else{
+                Toast.makeText(getApplicationContext(), "Filtering Events",
+                        Toast.LENGTH_SHORT).show();
+            }
+
+        }  else if (id == R.id.nav_mygigs) {
+
+            startActivity(new Intent(this, MyGigsActivity.class));
+
+
+        } else if (id == R.id.nav_logout) {
             UserLocalStore userLocalStore = new UserLocalStore(this);
             userLocalStore.clearUserData();
             userLocalStore.setUserLoggedIn(false);
             startActivity(new Intent(this, LoginActivity.class));
-        } else if (id == R.id.nav_send) {
-            startActivity(new Intent(AllEventsActivity.this, MyGigsActivity.class));
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -174,5 +283,12 @@ public class AllEventsActivity extends AppCompatActivity
         return userLocalStore.getUserLoggedIn();
     }
 
+    public String getSelectedCity(){
+        return SelectedCity;
+    }
+
+    public String getSelectedGenre(){
+        return SelectedGenre;
+    }
 
 }

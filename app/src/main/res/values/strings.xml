@@ -13,7 +13,7 @@
     <string-array name="city_arrays">
         <item>Arlington</item>
         <item>Dallas</item>
-        <item>Forth Worth</item>
+        <item>Fort Worth</item>
         <item>Houston</item>
     </string-array>
 
@@ -24,20 +24,20 @@
         <item>Rock</item>
         <item>Pop</item>
         <item>EDM</item>
-        <item>Psychaedelic</item>
+        <item>Psychedelic</item>
     </string-array>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_name">Name</string>
-    <string name="prompt_re_password">Re-enter your password</string>
+    <string name="prompt_re_password">Re-enter password</string>
     <string name="action_sign_in">Login</string>
     <string name="action_register">Register</string>
     <string name="action_sign_in_short">Login</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_invalid_email">The email address is invalid</string>
+    <string name="error_invalid_password">The password is too short</string>
+    <string name="error_incorrect_password">The password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
@@ -50,21 +50,21 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
-    <string name="prompt_phone_number">Enter your phone number</string>
-    <string name="prompt_dob">Enter your date of birth</string>
+    <string name="prompt_phone_number">Enter phone number</string>
+    <string name="prompt_dob">Enter date of birth</string>
     <string name="title_activity_add_event">AddEventActivity</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_all_events">AllEventsActivity</string>
-    <string name="title_add_event">Add an event..</string>
+    <string name="title_add_event">Add an event</string>
     <string name="event_name">Event Name</string>
     <string name="event_address">Event Address</string>
     <string name="event_cover_charge">Event Cover Charge</string>
     <string name="event_host_phone">Your phone number</string>
     <string name="select_beverage_type">Select beverage type</string>
     <string name="select_city">Select city</string>
-    <string name="is_private">Check if this is a private event</string>
-    <string name="isMinAge">Check if this event is restricted for above 21</string>
+    <string name="is_private">Private event(By Invite only)</string>
+    <string name="isMinAge">Restricted, 21+ only</string>
     <string name="set_from_date">Event starts on</string>
     <string name="set_from_time">Event starts at</string>
     <string name="set_to_date">Event ends on</string>
@@ -82,5 +82,16 @@
         <item>Alcohol</item>
         <item>Non-alcohol</item>
     </string-array>
+
+    <!-- Strings related to navigation drawer -->
+    <string name="mygigs">My GiGs</string>
+    <string name="logout">Logout</string>
+    <string name="personal">Personal</string>
+    <string name="filter">Filter</string>
+    <string name="city">City</string>
+    <string name="genre">Genre</string>
+    <string name="mypref">My preference</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
