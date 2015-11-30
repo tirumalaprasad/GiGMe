@@ -108,13 +108,4 @@
     </LinearLayout>
 
 
-    <ScrollView
-        android:id="@+id/login_form"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="false">
-
-    </ScrollView>
-
-
 </LinearLayout>

@@ -51,9 +51,7 @@ public class AllEventsActivity extends AppCompatActivity implements NavigationVi
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         userLocalStore = new UserLocalStore(this);
-        User user = userLocalStore.getLoggedInUser();
-        // mName.setText(user.name);
-        // mEmail.setText(user.email);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -215,10 +213,11 @@ public class AllEventsActivity extends AppCompatActivity implements NavigationVi
             builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Snackbar snackbar1 = Snackbar.make(listView, "Genre Selected", Snackbar.LENGTH_SHORT);
-                    snackbar1.show();
-                    selectedGenreList.add(which);
 
+                    selectedGenreList.add(which);
+                    buildPreferenceList();
+                    Snackbar snackbar1 = Snackbar.make(listView, "Genre "+getSelectedGenre()+" Selected", Snackbar.LENGTH_SHORT);
+                    snackbar1.show();
                     dialog.dismiss();
                 }
             });
@@ -257,7 +256,7 @@ public class AllEventsActivity extends AppCompatActivity implements NavigationVi
             else{
                 Toast.makeText(getApplicationContext(), "Filtering Events",
                         Toast.LENGTH_SHORT).show();
-                buildPreferenceList();
+
 
                 //Toast.makeText(getApplicationContext(), getSelectedCity()+" "+getSelectedGenre(),Toast.LENGTH_SHORT).show();
                 serverRequest.accessWebService(getSelectedCity(), getSelectedGenre().substring(0, getSelectedGenre().length()-1), this, this);
