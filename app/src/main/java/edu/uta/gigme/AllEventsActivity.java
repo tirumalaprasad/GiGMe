@@ -243,6 +243,7 @@ public class AllEventsActivity extends AppCompatActivity
             else{
                 Toast.makeText(getApplicationContext(), "Filtering Events",
                         Toast.LENGTH_SHORT).show();
+                buildPreferenceList();
             }
 
         }  else if (id == R.id.nav_mygigs) {
@@ -287,8 +288,43 @@ public class AllEventsActivity extends AppCompatActivity
         return SelectedCity;
     }
 
+    public void setSelectedGenre(String list){
+        SelectedGenre = list;
+    }
+
     public String getSelectedGenre(){
         return SelectedGenre;
+    }
+
+    String[] genreStringArray = new String[]{"Metal","Rock","Pop","EDM","Psychedelic"};
+    void buildPreferenceList(){
+        StringBuilder sb = new StringBuilder(5);
+        for (Integer i: selectedGenreList) {
+
+        String x = i.toString();
+        switch (x){
+            case "0":
+                sb.append(genreStringArray[0]+" ");
+                break;
+            case "1":
+                sb.append(genreStringArray[1]+" ");
+                break;
+            case "2":
+                sb.append(genreStringArray[2]+" ");
+                break;
+            case "3":
+                sb.append(genreStringArray[3]+" ");
+                break;
+            case "4":
+                sb.append(genreStringArray[4]+" ");
+                break;
+            default:
+                i = 0;
+        }
+        }
+
+        Toast.makeText(getApplicationContext(), sb.toString(),Toast.LENGTH_SHORT).show();
+        setSelectedGenre(sb.toString());
     }
 
 }
