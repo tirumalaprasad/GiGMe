@@ -13,7 +13,6 @@
     tools:showIn="@layout/activity_add_event"
     android:id="@+id/rl_main"
 
-    android:background="@drawable/hostbg"
     >
 
     <ScrollView

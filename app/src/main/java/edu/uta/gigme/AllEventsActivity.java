@@ -215,10 +215,8 @@ public class AllEventsActivity extends AppCompatActivity implements NavigationVi
             builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getApplicationContext(),
-                            "Genre Selected",
-                            Toast.LENGTH_LONG)
-                            .show();
+                    Snackbar snackbar1 = Snackbar.make(listView, "Genre Selected", Snackbar.LENGTH_SHORT);
+                    snackbar1.show();
                     selectedGenreList.add(which);
 
                     dialog.dismiss();
