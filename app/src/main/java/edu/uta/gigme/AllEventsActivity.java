@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -141,6 +142,7 @@ public class AllEventsActivity extends AppCompatActivity implements NavigationVi
 
             AlertDialog.Builder b = new AlertDialog.Builder(this);
             b.setTitle("City");
+            SelectedCity = null;
             String[] types = {"Arlington", "Dallas","Fort Worth","Houston"};
             b.setItems(types, new DialogInterface.OnClickListener() {
 
@@ -150,24 +152,33 @@ public class AllEventsActivity extends AppCompatActivity implements NavigationVi
                     dialog.dismiss();
                     switch (which) {
                         case 0:
-                            Toast.makeText(getApplicationContext(), "City Arlington Selected",
-                                    Toast.LENGTH_SHORT).show();
                             SelectedCity = "Arlington";
+                            Snackbar snackbar = Snackbar
+                                    .make(listView, "City "+getSelectedCity()+" Selected", Snackbar.LENGTH_SHORT);
+                            snackbar.show();
                             break;
+
                         case 1:
-                            Toast.makeText(getApplicationContext(), "City Dallas Selected",
-                                    Toast.LENGTH_SHORT).show();
+
                             SelectedCity = "Dallas";
+                            Snackbar snackbar1 = Snackbar
+                                    .make(listView, "City "+getSelectedCity()+" Selected", Snackbar.LENGTH_SHORT);
+                            snackbar1.show();
                             break;
+
                         case 2:
-                            Toast.makeText(getApplicationContext(), "City Fort Worth Selected",
-                                    Toast.LENGTH_SHORT).show();
+
                             SelectedCity = "Fort Worth";
+                            Snackbar snackbar2 = Snackbar
+                                .make(listView, "City "+getSelectedCity()+" Selected", Snackbar.LENGTH_SHORT);
+                            snackbar2.show();
                             break;
                         case 3:
-                            Toast.makeText(getApplicationContext(), "City Houston Selected",
-                                    Toast.LENGTH_SHORT).show();
+                            
                             SelectedCity = "Houston";
+                            Snackbar snackbar3 = Snackbar
+                                .make(listView, "City "+getSelectedCity()+" Selected", Snackbar.LENGTH_SHORT);
+                            snackbar3.show();
                             break;
                     }
                 }
@@ -183,6 +194,7 @@ public class AllEventsActivity extends AppCompatActivity implements NavigationVi
             selectedGenreList = new ArrayList<>();
             final boolean[] isSelectedGenre = {false,false,false,false,false};
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            SelectedGenre = null;
             builder.setTitle("Genre")
                     .setMultiChoiceItems(R.array.genre_arrays, isSelectedGenre, new DialogInterface.OnMultiChoiceClickListener() {
                                 @Override
@@ -202,10 +214,8 @@ public class AllEventsActivity extends AppCompatActivity implements NavigationVi
             builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getApplicationContext(),
-                            "Genre Selected",
-                            Toast.LENGTH_LONG)
-                            .show();
+                    Snackbar snackbar1 = Snackbar.make(listView, "Genre Selected", Snackbar.LENGTH_SHORT);
+                    snackbar1.show();
                     selectedGenreList.add(which);
 
                     dialog.dismiss();

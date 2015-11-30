@@ -19,6 +19,7 @@
     <item android:title="@string/personal">
         <menu>
             <item
+                android:background="#8d131212"
                 android:id="@+id/nav_mygigs"
                 android:icon="@drawable/ic_menu_mygigs"
                 android:title="@string/mygigs" />

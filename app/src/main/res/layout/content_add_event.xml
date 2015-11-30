@@ -11,7 +11,9 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="edu.uta.gigme.AddEventActivity"
     tools:showIn="@layout/activity_add_event"
-    android:id="@+id/rl_main">
+    android:id="@+id/rl_main"
+
+    >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -23,12 +25,15 @@
 
 
             <EditText
+                android:drawableLeft="@drawable/ic_name"
                 android:id="@+id/etEventName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
                 android:hint="@string/event_name" />
 
             <EditText
+                android:drawableLeft="@drawable/ic_address"
                 android:id="@+id/etEventAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -38,6 +43,7 @@
                 android:hint="@string/event_address" />
 
             <EditText
+                android:drawableLeft="@drawable/ic_contact"
                 android:id="@+id/etEventHostPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -49,6 +55,7 @@
 
             <EditText
                 android:id="@+id/etEventCoverCharge"
+                android:drawableLeft="@drawable/ic_ticketprice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -65,6 +72,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:drawableLeft="@drawable/ic_bevrage"
                     android:id="@+id/tv_beverage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -92,6 +100,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:drawableLeft="@drawable/ic_food"
                     android:id="@+id/tv_type_of_food"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -119,6 +128,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:drawableLeft="@drawable/ic_city"
                     android:id="@+id/tv_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -146,6 +156,7 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:drawableLeft="@drawable/ic_genre2"
                     android:id="@+id/tv_genre"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -166,6 +177,7 @@
             </LinearLayout>
 
             <CheckBox
+                android:drawableLeft="@drawable/ic_privateevent"
                 android:id="@+id/cb_private"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -174,6 +186,7 @@
                 android:text="@string/is_private" />
 
             <CheckBox
+                android:drawableLeft="@drawable/ic_rstricted"
                 android:id="@+id/cb_minAge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -187,52 +200,65 @@
                 android:layout_height="match_parent"
                 android:layout_below="@id/cb_minAge"
                 android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
 
                 <Button
+                    android:drawableLeft="@drawable/ic_start"
                     android:id="@+id/btn_set_from_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/set_from_date" />
+                    android:text="@string/set_from_date"
+                    android:layout_weight="0.5"/>
 
                 <Button
+                    android:drawableLeft="@drawable/ic_startsat"
                     android:id="@+id/btn_set_from_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/set_from_time" />
+                    android:text="@string/set_from_time"
+                    android:layout_weight="0.5"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/ll_event_to"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/ll_event_from"
                 android:layout_marginTop="10dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="1">
 
                 <Button
+                    android:drawableLeft="@drawable/ic_start"
                     android:id="@+id/btn_set_to_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/set_to_date" />
+                    android:text="@string/set_to_date"
+                    android:layout_weight="0.5" />
 
                 <Button
+                    android:drawableLeft="@drawable/ic_endsat"
                     android:id="@+id/btn_set_to_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/set_to_time" />
+                    android:text="@string/set_to_time"
+                    android:layout_weight="0.5" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/ll_create_event"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@id/ll_event_to"
-                android:background="@color/colorWetAsphalt"
+
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal"
                 >
                 <Button
+                    android:drawableLeft="@drawable/ic_createevent"
+                    android:layout_gravity="center"
                     android:id="@+id/btn_create_event"
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/create_event"/>

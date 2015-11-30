@@ -2,14 +2,14 @@
     <string name="app_name">GiGMe</string>
 
     <!-- beverage type popup -->
-    <string name="type_of_food_prompt">Select beverage type</string>
+    <string name="type_of_food_prompt">Food served</string>
     <string-array name="type_of_food_arrays">
         <item>Vegetarian</item>
         <item>Non-vegetarian</item>
         <item>Both</item>
     </string-array>
 
-    <string name="city_prompt">Select your city</string>
+    <string name="city_prompt">Select City</string>
     <string-array name="city_arrays">
         <item>Arlington</item>
         <item>Dallas</item>
@@ -18,7 +18,7 @@
     </string-array>
 
 
-    <string name="genre_prompt">Select event genre</string>
+    <string name="genre_prompt">Select Genre</string>
     <string-array name="genre_arrays">
         <item>Metal</item>
         <item>Rock</item>
@@ -59,9 +59,9 @@
     <string name="title_add_event">Add an event</string>
     <string name="event_name">Event Name</string>
     <string name="event_address">Event Address</string>
-    <string name="event_cover_charge">Event Cover Charge</string>
-    <string name="event_host_phone">Your phone number</string>
-    <string name="select_beverage_type">Select beverage type</string>
+    <string name="event_cover_charge">Ticket Price</string>
+    <string name="event_host_phone">Contact Number</string>
+    <string name="select_beverage_type">Beverage Served</string>
     <string name="select_city">Select city</string>
     <string name="is_private">Private event(By Invite only)</string>
     <string name="isMinAge">Restricted, 21+ only</string>
@@ -76,11 +76,11 @@
     <string name="delete_selected_events">Delete selected event</string>
     <string name="delete">Delete</string>
     <string name="title_activity_my_gigs">Your Gigs</string>
-    <string name="beverage_type_prompt">Select beverage type</string>
+    <string name="beverage_type_prompt">Beverage Served</string>
     <string name="create_event">Create event</string>
     <string-array name="beverage_type_arrays">
-        <item>Alcohol</item>
-        <item>Non-alcohol</item>
+        <item>Alcoholic</item>
+        <item>Non-alcoholic</item>
     </string-array>
 
     <!-- Strings related to navigation drawer -->
@@ -91,7 +91,7 @@
     <string name="city">City</string>
     <string name="genre">Genre</string>
     <string name="mypref">My preference</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
 
 </resources>

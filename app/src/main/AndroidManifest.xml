@@ -39,7 +39,8 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:windowSoftInputMode="adjustPan"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register"

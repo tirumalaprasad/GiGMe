@@ -28,6 +28,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="100dp"
+        android:layout_marginBottom="20dp"
+        android:paddingBottom="10dp"
         android:background="#8d131212">
 
         <android.support.design.widget.TextInputLayout
@@ -90,7 +92,7 @@
             android:background="#ffffff" />
 
 
-    </LinearLayout>
+
 
     <Button
         android:layout_width="wrap_content"
@@ -103,6 +105,8 @@
         android:id="@+id/btn_register"
         android:layout_gravity="center_horizontal"
         android:text="@string/action_register" />
+    </LinearLayout>
+
 
     <ScrollView
         android:id="@+id/login_form"
