@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="50dp"
+        android:paddingBottom="10dp"
         android:background="#8d131212">
 
         <android.support.design.widget.TextInputLayout
@@ -128,7 +129,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <RadioGroup
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/rg_sex"
             android:orientation="horizontal">
@@ -143,6 +144,7 @@
                 android:id="@+id/rb_male"
                 android:textColorHint="#f7f7f7"
                 android:checked="true"
+                android:layout_weight="0.5"
                 android:textColor="#f7f7f7"
                 android:layout_below="@+id/et_phonenumber"
                 android:layout_alignParentStart="true"
@@ -152,6 +154,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Female"
+                android:layout_weight="0.5"
                 android:textColor="#f7f7f7"
                 android:textColorHint="#f7f7f7"
                 android:id="@+id/rb_female"
@@ -169,10 +172,10 @@
             android:layout_height="wrap_content"
             android:text="@string/action_register"
             android:id="@+id/btn_register"
-
+            android:layout_below="@id/email_register_form"
         android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:textColor="#6a6868"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
