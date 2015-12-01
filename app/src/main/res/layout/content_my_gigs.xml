@@ -17,7 +17,17 @@
         android:layout_height="wrap_content"
         android:id="@+id/listEventsMyGigs"
         android:layout_centerHorizontal="true"
+        android:drawableStart="@drawable/ic_delete"
         android:divider="@android:color/holo_green_light"
-        >
+        android:layout_below="@+id/textView">
     </ListView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Tap To Delete ;)"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
