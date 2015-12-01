@@ -34,11 +34,11 @@ public class AllEventsActivity extends AppCompatActivity implements NavigationVi
     String SelectedGenre = null;
     ArrayList<Integer> selectedGenreList;
     public ServerRequest serverRequest;
-    int temp;
+
 
     public Event fetchedEvent;
 
-        @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -168,14 +168,14 @@ public class AllEventsActivity extends AppCompatActivity implements NavigationVi
 
                             SelectedCity = "Fort Worth";
                             Snackbar snackbar2 = Snackbar
-                                .make(listView, "City "+getSelectedCity()+" Selected", Snackbar.LENGTH_SHORT);
+                                    .make(listView, "City "+getSelectedCity()+" Selected", Snackbar.LENGTH_SHORT);
                             snackbar2.show();
                             break;
                         case 3:
-                            
+
                             SelectedCity = "Houston";
                             Snackbar snackbar3 = Snackbar
-                                .make(listView, "City "+getSelectedCity()+" Selected", Snackbar.LENGTH_SHORT);
+                                    .make(listView, "City "+getSelectedCity()+" Selected", Snackbar.LENGTH_SHORT);
                             snackbar3.show();
                             break;
                     }
@@ -314,38 +314,38 @@ public class AllEventsActivity extends AppCompatActivity implements NavigationVi
     }
 
     String[] genreStringArray = new String[]{"Metal","Rock","Pop","EDM","Psychedelic"};
+    String temp = new String();
     void buildPreferenceList(){
         StringBuilder sb = new StringBuilder(5);
-        String temp = new String();
         for (Integer i: selectedGenreList)
         {
 
-        String x = i.toString();
-        switch (x)
-        {
-            case "0":
-                sb.append("'"+genreStringArray[0]+"'"+",");
-                break;
-            case "1":
-                sb.append("'"+genreStringArray[1]+"'"+",");
-                break;
-            case "2":
-                sb.append("'"+genreStringArray[2]+"'"+",");
-                break;
-            case "3":
-                sb.append("'"+genreStringArray[3]+"'"+",");
-                break;
-            case "4":
-                sb.append("'"+genreStringArray[4]+"'"+",");
-                break;
-            default:
-                i = 0;
+            String x = i.toString();
+            switch (x)
+            {
+                case "0":
+                    sb.append(genreStringArray[0]+",");
+                    break;
+                case "1":
+                    sb.append(genreStringArray[1]+",");
+                    break;
+                case "2":
+                    sb.append(genreStringArray[2]+",");
+                    break;
+                case "3":
+                    sb.append(genreStringArray[3]+",");
+                    break;
+                case "4":
+                    sb.append(genreStringArray[4]+",");
+                    break;
+                default:
+                    i = 0;
+            }
         }
-     }
         if (sb.length() > 0 && sb.charAt(sb.length()-1)==',') {
             temp = sb.substring(0, sb.length()-1).toString();
         }
         //Toast.makeText(getApplicationContext(), sb.toString(),Toast.LENGTH_SHORT).show();
-        setSelectedGenre(temp);
+        setSelectedGenre(sb.toString());
     }
 }

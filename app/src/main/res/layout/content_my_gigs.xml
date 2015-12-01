@@ -12,11 +12,12 @@
     tools:context="edu.uta.gigme.MyGigsActivity"
     tools:showIn="@layout/activity_my_gigs">
 
-      <ListView
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/listEventsMyGigs"
         android:layout_centerHorizontal="true"
+        android:divider="@android:color/holo_green_light"
         >
     </ListView>
 </RelativeLayout>

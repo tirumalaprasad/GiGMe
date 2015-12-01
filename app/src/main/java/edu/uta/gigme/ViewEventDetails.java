@@ -4,6 +4,7 @@ package edu.uta.gigme;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -57,8 +58,7 @@ public class ViewEventDetails extends AppCompatActivity implements View.OnClickL
         //this is my code
 
             tveventName = (TextView) findViewById(R.id.tvEventName);
-            tveventAddress = (TextView) findViewById(R.id.tvEventAddress);
-            tveventPhone = (TextView) findViewById(R.id.tvEventHostPhoneNumber);
+
                 tveventCharge = (TextView) findViewById(R.id.tvEventCoverCharge);
                 tveventBeverage = (TextView) findViewById(R.id.tv_beverage);
                 tveventFood = (TextView) findViewById(R.id.tv_type_of_food);
@@ -93,17 +93,35 @@ public class ViewEventDetails extends AppCompatActivity implements View.OnClickL
             {
                 fetchedEvent = (Event)extras.get("fetchedEvent");
                 Toast.makeText(ViewEventDetails.this, fetchedEvent.toString(), Toast.LENGTH_SHORT).show();
-                tveventName.setText("Event Name" + fetchedEvent.eventName);
-                tveventCity.setText("Event City"+fetchedEvent.city);
-                tveventCharge.setText("Event Charge"+fetchedEvent.charge);
-                tveventFood.setText("Event Food"+fetchedEvent.food);
-                tveventGenre.setText("Event Genre"+fetchedEvent.genre);
-                tveventPrivate.setText("Event Private"+fetchedEvent.privateEvent);
-                tveventAge.setText("Event Age"+fetchedEvent.age);
-                tveventFromDate.setText("Event From D"+fetchedEvent.fromDate);
-                tveventToDate.setText("Event To D"+fetchedEvent.toDate);
-                tveventFromTime.setText("Event From T"+fetchedEvent.fromTime);
-                tveventToTime.setText("Event To T"+fetchedEvent.toTime);
+                tveventName.setText("Event Name: " + fetchedEvent.eventName);
+                tveventCity.setText("City: "+fetchedEvent.city);
+                tveventCharge.setText("Ticket Price: $"+fetchedEvent.charge);
+                tveventBeverage.setText("Beverage Served: "+fetchedEvent.beverage);
+                tveventFood.setText("Food Served: "+fetchedEvent.food);
+                tveventGenre.setText("Genre: "+fetchedEvent.genre);
+                //tveventPrivate.setText("Event Type: "+fetchedEvent.privateEvent);
+                //tveventAge.setText("Event Age"+fetchedEvent.age);
+                tveventFromDate.setText("Starts on: "+fetchedEvent.fromDate);
+                tveventToDate.setText("Ends on: "+fetchedEvent.toDate);
+                tveventFromTime.setText("Starts At: "+fetchedEvent.fromTime);
+                tveventToTime.setText("Ends At: "+fetchedEvent.toTime);
+
+                if(fetchedEvent.privateEvent.equals("private")){
+                    tveventPrivate.setText("Event Type: Private Event");
+                    tveventPrivate.setTextColor(Color.parseColor("#ff0000"));
+                }
+                else{
+                    tveventPrivate.setText("Event Type: Public Event");
+                }
+
+
+                if(fetchedEvent.age.equals("1")){
+                    tveventAge.setText("Age limit: "+"Restricted, 21+ only");
+                    tveventAge.setTextColor(Color.parseColor("#ff0000"));
+                }
+                else{
+                    tveventAge.setText("Age limit: "+"Open to all");
+                }
             }
         }
         else
