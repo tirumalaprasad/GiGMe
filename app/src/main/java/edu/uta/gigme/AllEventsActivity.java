@@ -34,7 +34,7 @@ public class AllEventsActivity extends AppCompatActivity implements NavigationVi
     String SelectedGenre = null;
     ArrayList<Integer> selectedGenreList;
     public ServerRequest serverRequest;
-
+    int temp;
 
     public Event fetchedEvent;
 
@@ -316,6 +316,7 @@ public class AllEventsActivity extends AppCompatActivity implements NavigationVi
     String[] genreStringArray = new String[]{"Metal","Rock","Pop","EDM","Psychedelic"};
     void buildPreferenceList(){
         StringBuilder sb = new StringBuilder(5);
+        String temp = new String();
         for (Integer i: selectedGenreList)
         {
 
@@ -323,25 +324,28 @@ public class AllEventsActivity extends AppCompatActivity implements NavigationVi
         switch (x)
         {
             case "0":
-                sb.append(genreStringArray[0]+",");
+                sb.append("'"+genreStringArray[0]+"'"+",");
                 break;
             case "1":
-                sb.append(genreStringArray[1]+",");
+                sb.append("'"+genreStringArray[1]+"'"+",");
                 break;
             case "2":
-                sb.append(genreStringArray[2]+",");
+                sb.append("'"+genreStringArray[2]+"'"+",");
                 break;
             case "3":
-                sb.append(genreStringArray[3]+",");
+                sb.append("'"+genreStringArray[3]+"'"+",");
                 break;
             case "4":
-                sb.append(genreStringArray[4]+",");
+                sb.append("'"+genreStringArray[4]+"'"+",");
                 break;
             default:
                 i = 0;
         }
      }
+        if (sb.length() > 0 && sb.charAt(sb.length()-1)==',') {
+            temp = sb.substring(0, sb.length()-1).toString();
+        }
         //Toast.makeText(getApplicationContext(), sb.toString(),Toast.LENGTH_SHORT).show();
-        setSelectedGenre(sb.toString());
+        setSelectedGenre(temp);
     }
 }

@@ -43,6 +43,7 @@
         completions."
     </string>
     <string name="title_activity_register">Register</string>
+    <string name="view_contact">View Contact</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_events">Events</string>
 
@@ -70,7 +71,7 @@
     <string name="set_to_date">Event ends on</string>
     <string name="set_to_time">Event ends at</string>
     <string name="title_activity_view_event_details">ViewEventDetails</string>
-    <string name="title_activity_view_on_map">ViewOnMap</string>
+    <string name="title_activity_view_on_map">View On Map</string>
     <string name="title_activity_view_on_maps">Map</string>
     <string name="title_activity_maps">Map</string>
     <string name="delete_selected_events">Delete selected event</string>
